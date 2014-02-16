@@ -875,8 +875,8 @@ function createDynamicShips() {
     // first ship
     var ids1_mask;
 
-    var gx = 100 * newShipCounter * getRandomInt(10, 50);
-    var gy = 100 * newShipCounter * getRandomInt(5, 10);
+    var gx = 100 * newShipCounter * getRandomInt(20, 100);
+    var gy = 100 * newShipCounter * getRandomInt(5, 50);
 
     if (newShipCounter <= 9) { ids1_mask = 'ship_z_0' + newShipCounter + '_mask'; }
     else { ids1_mask = 'ship_z_' + newShipCounter + '_mask'; }
