@@ -87,7 +87,6 @@
     <Content Include="SpaceGame\textures\planets\earth_normal_2048.jpg" />
     <Content Include="SpaceGame\textures\planets\earth_specular_2048.jpg" />
     <Content Include="SpaceGame\textures\planets\moon_1024.jpg" />
-    <Content Include="SpaceGame\webgl_interactive_cubes.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
