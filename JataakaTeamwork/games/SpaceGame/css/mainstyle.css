@@ -14,6 +14,16 @@
     cursor: crosshair;
 }
 
+#the-canvas {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+
+#death-star{
+    display: none;
+}
+
 #info {
     position: absolute;
     top: 0px;

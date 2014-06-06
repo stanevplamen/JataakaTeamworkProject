@@ -10,17 +10,16 @@
 
         cloudsScale = 1.005;
         moonScale = 0.23;
-        venusScale = 0.43;
 
         MARGIN = 0;
         SCREEN_HEIGHT = window.innerHeight - MARGIN * 2;
         sCREEN_WIDTH = window.innerWidth;
 
         d, dPlanet, dMoon, dMoonVec = new THREE.Vector3();
-        d, dPlanet, dVenus, dVenusVec = new THREE.Vector3();
 
         clock = new THREE.Clock();
 
+        drawShip();
         init();
         animate();
         resetToDisplay();
@@ -32,7 +31,6 @@
 
     var cloudsScale;
     var moonScale;
-    var venusScale;
 
     var MARGIN;
     var SCREEN_HEIGHT;
@@ -40,12 +38,12 @@
 
     var container, stats;
     var camera, controls, scene, sceneCube, renderer;
-    var geometry, meshPlanet, meshClouds, meshMoon, meshVenus;
+    var geometry, meshPlanet, meshClouds, meshMoon;
     var dirLight, pointLight, ambientLight;
-    var d, dPlanet, dMoon, dMoonVec, dVenus, dVenusVec;
+    var d, dPlanet, dMoon, dMoonVec;
     var clock;
 
-    var projector, raycaster;
+    var projector, canvasrenderer;
 
     function init() {
 
@@ -80,8 +78,6 @@
         var specularTexture = THREE.ImageUtils.loadTexture("textures/planets/earth_specular_2048.jpg");
 
         var moonTexture = THREE.ImageUtils.loadTexture("textures/planets/moon_1024.jpg");
-
-        var venusTexture = THREE.ImageUtils.loadTexture("textures/planets/venus_1024.jpg");
 
         var shader = THREE.ShaderLib["normalmap"];
         var uniforms = THREE.UniformsUtils.clone(shader.uniforms);
@@ -146,26 +142,9 @@
         for (var i = 0; i < 2; i++) {
 
             var meshMoonNew = new THREE.Mesh(geometry, materialMoon);
-            meshMoonNew.position.set(-radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, -Math.random() * 66000);
+            meshMoonNew.position.set(-radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, Math.random() * 10000);
             meshMoonNew.scale.set(moonScale, moonScale, moonScale);
             scene.add(meshMoonNew);
-        }
-
-        // venus
-
-        var materialVenus = new THREE.MeshPhongMaterial({ color: 0xffffff, map: venusTexture });
-
-        meshVenus = new THREE.Mesh(geometry, materialVenus);
-        meshVenus.position.set(radius * 7, 0, 0);
-        meshVenus.scale.set(venusScale, venusScale, venusScale);
-        scene.add(meshVenus);
-
-        for (var i = 0; i < 2; i++) {
-
-            var meshVenusNew = new THREE.Mesh(geometry, materialVenus);
-            meshVenusNew.position.set(-radius * Math.random() * Math.random() * i * 33, Math.random() * 30000, Math.random() * 50000);
-            meshVenusNew.scale.set(venusScale, venusScale, venusScale);
-            scene.add(meshVenusNew);
         }
 
         // stars
@@ -224,29 +203,18 @@
 
         }
 
-        /// new cubes
+        /// particles
 
-        var geometry = new THREE.CubeGeometry(200, 200, 200);
+        //for (var i = 0; i < 100; i++) {
 
-        for (var i = 0; i < 200; i++) {
+        //    var particle = new THREE.Sprite(new THREE.SpriteCanvasMaterial({ color: Math.random() * 0x808080 + 0x808080, program: programStroke }));
+        //    particle.position.x = Math.random() * 800 - 400;
+        //    particle.position.y = Math.random() * 800 - 400;
+        //    particle.position.z = Math.random() * 800 - 400;
+        //    particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
+        //    scene.add(particle);
 
-            var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
-
-            object.position.x = Math.random() * 80000;
-            object.position.y = Math.random() * 80000;
-            object.position.z = Math.random() * 80000;
-
-            object.rotation.x = Math.random() * 2 * Math.PI;
-            object.rotation.y = Math.random() * 2 * Math.PI;
-            object.rotation.z = Math.random() * 2 * Math.PI;
-
-            object.scale.x = Math.random() + 0.5;
-            object.scale.y = Math.random() + 0.5;
-            object.scale.z = Math.random() + 0.5;
-
-            scene.add(object);
-
-        }
+        //}
 
         renderer = new THREE.WebGLRenderer({ alpha: false });
         renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -327,19 +295,6 @@
 
         }
 
-        dVenusVec.subVectors(camera.position, meshVenus.position);
-        dVenus = dVenusVec.length();
-
-        if (dVenus < dPlanet) {
-
-            d = (dVenus - radius * venusScale * 1.01);
-
-        } else {
-
-            d = (dPlanet - radius * 1.01);
-
-        }
-
         controls.movementSpeed = 0.33 * d;
         controls.update(delta);
 
@@ -347,6 +302,14 @@
         composer.render(delta);
 
     };
+
+    function drawShip() {
+        var canvas = document.getElementById('the-canvas');
+        var ctx = canvas.getContext('2d');
+        var ship = document.getElementById('death-star');
+        
+        ctx.drawImage(ship, 5, 5);
+    }
 
     function resetToDisplay() {
         SCREEN_HEIGHT = window.innerHeight;
@@ -373,6 +336,4 @@
         context.stroke();
 
     }
-
-
 //}());
