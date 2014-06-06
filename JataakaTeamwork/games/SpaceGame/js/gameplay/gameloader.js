@@ -231,7 +231,7 @@
 
         var geometry = new THREE.CubeGeometry(200, 200, 200);
 
-        for (var i = 0; i < 200; i++) {
+        for (var i = 0; i < 400; i++) {
 
             var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
@@ -324,7 +324,7 @@
 
             if (INTERSECTED != intersects[0].object) {
 
-                if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+                if (INTERSECTED && INTERSECTED.material.emissive) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 
                 INTERSECTED = intersects[0].object;
                 INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
