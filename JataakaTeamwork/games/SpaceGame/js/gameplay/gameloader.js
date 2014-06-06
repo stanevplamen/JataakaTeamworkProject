@@ -45,7 +45,7 @@
     var d, dPlanet, dMoon, dMoonVec, dVenus, dVenusVec;
     var clock;
 
-    var projector, canvasrenderer;
+    var projector, raycaster;
 
     function init() {
 
@@ -224,18 +224,29 @@
 
         }
 
-        /// particles
+        /// new cubes
 
-        //for (var i = 0; i < 100; i++) {
+        var geometry = new THREE.CubeGeometry(200, 200, 200);
 
-        //    var particle = new THREE.Sprite(new THREE.SpriteCanvasMaterial({ color: Math.random() * 0x808080 + 0x808080, program: programStroke }));
-        //    particle.position.x = Math.random() * 800 - 400;
-        //    particle.position.y = Math.random() * 800 - 400;
-        //    particle.position.z = Math.random() * 800 - 400;
-        //    particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
-        //    scene.add(particle);
+        for (var i = 0; i < 200; i++) {
 
-        //}
+            var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+
+            object.position.x = Math.random() * 80000;
+            object.position.y = Math.random() * 80000;
+            object.position.z = Math.random() * 80000;
+
+            object.rotation.x = Math.random() * 2 * Math.PI;
+            object.rotation.y = Math.random() * 2 * Math.PI;
+            object.rotation.z = Math.random() * 2 * Math.PI;
+
+            object.scale.x = Math.random() + 0.5;
+            object.scale.y = Math.random() + 0.5;
+            object.scale.z = Math.random() + 0.5;
+
+            scene.add(object);
+
+        }
 
         renderer = new THREE.WebGLRenderer({ alpha: false });
         renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
