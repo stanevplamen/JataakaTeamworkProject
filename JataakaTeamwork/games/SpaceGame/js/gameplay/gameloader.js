@@ -10,7 +10,7 @@
 
         cloudsScale = 1.005;
         moonScale = 0.23;
-        venusScale = 0.23;
+        venusScale = 0.43;
 
         MARGIN = 0;
         SCREEN_HEIGHT = window.innerHeight - MARGIN * 2;
@@ -146,7 +146,7 @@
         for (var i = 0; i < 2; i++) {
 
             var meshMoonNew = new THREE.Mesh(geometry, materialMoon);
-            meshMoonNew.position.set(-radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, Math.random() * 10000);
+            meshMoonNew.position.set(-radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, -Math.random() * 66000);
             meshMoonNew.scale.set(moonScale, moonScale, moonScale);
             scene.add(meshMoonNew);
         }
@@ -163,7 +163,7 @@
         for (var i = 0; i < 2; i++) {
 
             var meshVenusNew = new THREE.Mesh(geometry, materialVenus);
-            meshVenusNew.position.set(-radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, Math.random() * 10000);
+            meshVenusNew.position.set(-radius * Math.random() * Math.random() * i * 33, Math.random() * 30000, Math.random() * 50000);
             meshVenusNew.scale.set(venusScale, venusScale, venusScale);
             scene.add(meshVenusNew);
         }
