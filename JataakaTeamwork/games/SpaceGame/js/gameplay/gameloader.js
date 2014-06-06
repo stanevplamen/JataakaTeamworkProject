@@ -18,6 +18,7 @@
 
         d, dPlanet, dMoon, dMoonVec = new THREE.Vector3();
         d, dPlanet, dVenus, dVenusVec = new THREE.Vector3();
+        mouse = new THREE.Vector2();
 
         clock = new THREE.Clock();
 
@@ -30,11 +31,13 @@
     var tilt;
     var rotationSpeed;
 
+    var mouse;
+
     var cloudsScale;
     var moonScale;
     var venusScale;
 
-    var MARGIN;
+    var MARGIN, INTERSECTED;
     var SCREEN_HEIGHT;
     var SCREEN_WIDTH;
 
@@ -248,6 +251,9 @@
 
         }
 
+        projector = new THREE.Projector();
+        raycaster = new THREE.Raycaster();
+
         renderer = new THREE.WebGLRenderer({ alpha: false });
         renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         renderer.sortObjects = false;
@@ -261,6 +267,8 @@
         stats.domElement.style.top = '0px';
         stats.domElement.style.zIndex = 100;
         container.appendChild(stats.domElement);
+
+        document.addEventListener('mousemove', onDocumentMouseMove, false);
 
         window.addEventListener('resize', onWindowResize, false);
 
@@ -302,6 +310,35 @@
     };
 
     function render() {
+
+        // find intersections
+
+        var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
+        projector.unprojectVector(vector, camera);
+
+        raycaster.set(camera.position, vector.sub(camera.position).normalize());
+
+        var intersects = raycaster.intersectObjects(scene.children);
+
+        if (intersects.length > 0) {
+
+            if (INTERSECTED != intersects[0].object) {
+
+                if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+
+                INTERSECTED = intersects[0].object;
+                INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+                INTERSECTED.material.emissive.setHex(0xff0000);
+
+            }
+
+        } else {
+
+            if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+
+            INTERSECTED = null;
+
+        }
 
         // rotate the planet and clouds
 
@@ -371,6 +408,15 @@
         context.beginPath();
         context.arc(0, 0, 0.5, 0, PI2, true);
         context.stroke();
+
+    }
+
+    function onDocumentMouseMove(event) {
+
+        event.preventDefault();
+
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     }
 
