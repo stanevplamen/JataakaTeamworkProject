@@ -1,5 +1,6 @@
 ﻿//(function () {
 
+    // initializing the main structures and objects when the document is loaded
     window.onload = function () {
         
         if (!Detector.webgl) Detector.addGetWebGLMessage();
@@ -27,6 +28,7 @@
         resetToDisplay();
     };
 
+    // global variables
     var radius;
     var tilt;
     var rotationSpeed;
@@ -48,20 +50,28 @@
     var d, dPlanet, dMoon, dMoonVec, dVenus, dVenusVec;
     var clock;
 
+    // special objects to find the intersections
     var projector, raycaster;
 
+    // This is the main initialization function
+    // Loads the three.js 3D envinronment
+    // Load the vusualization space and objects
     function init() {
 
+        // the main container for the three.js envinronment
         container = document.createElement('div');
         container.id = 'container';
         document.body.appendChild(container);
 
+        // viwer position details initializing
         camera = new THREE.PerspectiveCamera(25, SCREEN_WIDTH / SCREEN_HEIGHT, 50, 1e7);
         camera.position.z = radius * 15;
 
+        // main container for the visual objects
         scene = new THREE.Scene();
         scene.fog = new THREE.FogExp2(0x000000, 0.00000025);
 
+        // main control module
         controls = new THREE.FlyControls(camera);
 
         controls.movementSpeed = 1000;
@@ -70,6 +80,7 @@
         controls.autoForward = false;
         controls.dragToLook = false;
 
+        /// visual objects and effects
         dirLight = new THREE.DirectionalLight(0xffffff);
         dirLight.position.set(-1, 0, 1).normalize();
         scene.add(dirLight);
@@ -227,7 +238,7 @@
 
         }
 
-        /// new cubes
+        /// new cubes for target using
 
         var geometry = new THREE.CubeGeometry(200, 200, 200);
 
@@ -311,7 +322,7 @@
 
     function render() {
 
-        // find intersections
+        // find intersections between the mouse cursor and the present 3D objects
 
         var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
         projector.unprojectVector(vector, camera);
@@ -334,7 +345,7 @@
 
         } else {
 
-            if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+            if (INTERSECTED && INTERSECTED.material.emissive) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 
             INTERSECTED = null;
 
@@ -385,6 +396,7 @@
 
     };
 
+    // this function resets the view when the game starts
     function resetToDisplay() {
         SCREEN_HEIGHT = window.innerHeight;
         SCREEN_WIDTH = window.innerWidth;
@@ -397,20 +409,7 @@
         composer.reset();
     };
 
-    function mouseOverPlanet(a){
-
-        var a = 4;
-    }
-
-    var programStroke = function (context) {
-
-        context.lineWidth = 0.025;
-        context.beginPath();
-        context.arc(0, 0, 0.5, 0, PI2, true);
-        context.stroke();
-
-    }
-
+    // function to calculate the mouse coordinates when mouse move
     function onDocumentMouseMove(event) {
 
         event.preventDefault();
