@@ -10,12 +10,14 @@
 
         cloudsScale = 1.005;
         moonScale = 0.23;
+        venusScale = 0.23;
 
         MARGIN = 0;
         SCREEN_HEIGHT = window.innerHeight - MARGIN * 2;
         sCREEN_WIDTH = window.innerWidth;
 
         d, dPlanet, dMoon, dMoonVec = new THREE.Vector3();
+        d, dPlanet, dVenus, dVenusVec = new THREE.Vector3();
 
         clock = new THREE.Clock();
 
@@ -30,6 +32,7 @@
 
     var cloudsScale;
     var moonScale;
+    var venusScale;
 
     var MARGIN;
     var SCREEN_HEIGHT;
@@ -37,9 +40,9 @@
 
     var container, stats;
     var camera, controls, scene, sceneCube, renderer;
-    var geometry, meshPlanet, meshClouds, meshMoon;
+    var geometry, meshPlanet, meshClouds, meshMoon, meshVenus;
     var dirLight, pointLight, ambientLight;
-    var d, dPlanet, dMoon, dMoonVec;
+    var d, dPlanet, dMoon, dMoonVec, dVenus, dVenusVec;
     var clock;
 
     var projector, canvasrenderer;
@@ -77,6 +80,8 @@
         var specularTexture = THREE.ImageUtils.loadTexture("textures/planets/earth_specular_2048.jpg");
 
         var moonTexture = THREE.ImageUtils.loadTexture("textures/planets/moon_1024.jpg");
+
+        var venusTexture = THREE.ImageUtils.loadTexture("textures/planets/venus_1024.jpg");
 
         var shader = THREE.ShaderLib["normalmap"];
         var uniforms = THREE.UniformsUtils.clone(shader.uniforms);
@@ -144,6 +149,23 @@
             meshMoonNew.position.set(-radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, Math.random() * 10000);
             meshMoonNew.scale.set(moonScale, moonScale, moonScale);
             scene.add(meshMoonNew);
+        }
+
+        // venus
+
+        var materialVenus = new THREE.MeshPhongMaterial({ color: 0xffffff, map: venusTexture });
+
+        meshVenus = new THREE.Mesh(geometry, materialVenus);
+        meshVenus.position.set(radius * 7, 0, 0);
+        meshVenus.scale.set(venusScale, venusScale, venusScale);
+        scene.add(meshVenus);
+
+        for (var i = 0; i < 2; i++) {
+
+            var meshVenusNew = new THREE.Mesh(geometry, materialVenus);
+            meshVenusNew.position.set(-radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, Math.random() * 10000);
+            meshVenusNew.scale.set(venusScale, venusScale, venusScale);
+            scene.add(meshVenusNew);
         }
 
         // stars
@@ -287,6 +309,19 @@
         if (dMoon < dPlanet) {
 
             d = (dMoon - radius * moonScale * 1.01);
+
+        } else {
+
+            d = (dPlanet - radius * 1.01);
+
+        }
+
+        dVenusVec.subVectors(camera.position, meshVenus.position);
+        dVenus = dVenusVec.length();
+
+        if (dVenus < dPlanet) {
+
+            d = (dVenus - radius * venusScale * 1.01);
 
         } else {
 
