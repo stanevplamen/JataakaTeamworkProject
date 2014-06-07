@@ -57,7 +57,7 @@ var targetsDictionary = {};
 var targetScreenObjects = {}
 var visualTargetIds = {};
 var targetIdCounter = 1;
-var fireDelayIndex = 200;
+var fireDelayIndex = 1000;
 
 // special objects to find the intersections
 var projector, raycaster;
@@ -411,6 +411,20 @@ function render() {
 
     }
 
+    // moving the bullets
+
+    var mislength =  missilesObjects.length;
+
+    for (var i = 0; i < mislength; i++) {
+
+        var currentMissile = missilesObjects[i]
+
+        currentMissile.position.x += additionX / 10;
+        currentMissile.position.y += additionY / 10;
+        currentMissile.position.z += additionZ / 10;
+
+    }
+
     controls.movementSpeed = 0.33 * d;
     controls.update(delta);
 
@@ -448,7 +462,7 @@ var objectTokill = null;
 function callFire() {
 
     // fire torpedo function
-    initTorpedo();
+    initMissile();
 
     // kill the object is its on target
     var current_id = INTERSECTED.id;
@@ -477,26 +491,46 @@ function delayKill(current_id) {
 
 }
 
-function initTorpedo() {
+var additionX;
+var additionY;
+var additionZ;
+var missilesObjects = [];
+function initMissile() {
 
     var posX = camera.position.x;
     var posY = camera.position.y;
     var posZ = camera.position.z;
 
-    var rotX = camera.rotation.x;
-    var rotY = camera.rotation.y;
-    var rotZ = camera.rotation.z;
+    if (INTERSECTED && INTERSECTED.position.x) {
 
-    var geometry = new THREE.CubeGeometry(30, 30, 30);
-    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+        var moveX = INTERSECTED.position.x;
+        var moveY = INTERSECTED.position.y;
+        var moveZ = INTERSECTED.position.z;
 
-    object.position.x = Math.random() * 80000;
-    object.position.y = Math.random() * 80000;
-    object.position.z = Math.random() * 80000;
+        additionX = moveX - posX;
+        additionY = moveY - posY;
+        additionZ = moveZ - posZ;
 
-    scene.add(object);
+        var geometry = new THREE.CubeGeometry(50, 50, 50);
 
+        for (var i = 0; i < 5; i++) {
+
+            var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+
+            object.position.x = posX;
+            object.position.y = posY;
+            object.position.z = posZ;
+            missilesObjects.push(object);
+
+            scene.add(object);
+        }
+
+        setTimeout(function () {
+            clearMissiles();
+        }, 1100);
+    }
 }
+
 
 //function coordsInit() {
 //    setTimeout(function () {
@@ -511,6 +545,16 @@ $(window).keypress(function (e) {
     }
 });
 
+function clearMissiles() {
+
+    for (var a in missilesObjects) {
+
+        var missile = missilesObjects[a];
+        scene.remove(missile);
+    }
+
+    missilesObjects.length = 0;
+}
 
 function drawShip() {
 
