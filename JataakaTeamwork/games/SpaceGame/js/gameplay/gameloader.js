@@ -23,7 +23,7 @@ window.onload = function () {
 
     clock = new THREE.Clock();
 
-	//drawShip();
+	drawShip();
     init();
     animate();
     resetToDisplay();
@@ -516,8 +516,8 @@ function drawShip() {
 
     var canvas = document.getElementById('the-canvas');
     var ctx = canvas.getContext('2d');
-    var ship = document.getElementById('death-star');
-    ctx.drawImage(ship, 5, 5);
+    var ship = document.getElementById('cabin');    
+    ctx.drawImage(ship, 0, 0, canvas.width, canvas.height);
 }
 
 
