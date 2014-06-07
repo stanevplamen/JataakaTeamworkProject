@@ -511,7 +511,7 @@ function initMissile() {
         additionY = moveY - posY;
         additionZ = moveZ - posZ;
 
-        var geometry = new THREE.CubeGeometry(50, 50, 50);
+        var geometry = new THREE.CubeGeometry(80, 80, 80);
 
         for (var i = 0; i < 5; i++) {
 
