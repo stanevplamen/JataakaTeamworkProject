@@ -57,6 +57,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SpaceGame\js\gameplay\Classes\Class.js" />
+    <Content Include="SpaceGame\js\gameplay\Classes\Target.js" />
+    <Content Include="SpaceGame\js\system\libs\jquery-2.0.2.js" />
     <Content Include="SpaceGame\textures\planets\death_star.png" />
     <Content Include="SpaceGame\textures\planets\Thumbs.db" />
     <None Include="Web.Debug.config">

@@ -23,7 +23,7 @@ window.onload = function () {
 
     clock = new THREE.Clock();
 
-	drawShip();
+	//drawShip();
     init();
     animate();
     resetToDisplay();
@@ -50,6 +50,14 @@ var geometry, meshPlanet, meshClouds, meshMoon, meshVenus;
 var dirLight, pointLight, ambientLight;
 var d, dPlanet, dMoon, dMoonVec, dVenus, dVenusVec;
 var clock;
+
+// this is a container for the current game targets 
+// searching by target_id -> (to get) the target (by its id)
+var targetsDictionary = {};
+var targetScreenObjects = {}
+var visualTargetIds = {};
+var targetIdCounter = 1;
+var fireDelayIndex = 200;
 
 // special objects to find the intersections
 var projector, raycaster;
@@ -245,6 +253,8 @@ function init() {
 
     for (var i = 0; i < 400; i++) {
 
+        targetIdCounter++;
+        var target_id = 'target' + targetIdCounter;
         var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
         object.position.x = Math.random() * 80000;
@@ -258,6 +268,17 @@ function init() {
         object.scale.x = Math.random() + 0.5;
         object.scale.y = Math.random() + 0.5;
         object.scale.z = Math.random() + 0.5;
+
+        object.id = target_id;
+
+        //  indicates that the element is real target
+        visualTargetIds[target_id] = true;
+
+        // the connection is visual object from scene - > in the targetsDictionary via the Target class instance
+        // var isalive = true;
+        // var currentTagret = new Target(target_id, object, isalive);
+        // targetsDictionary[target_id] = currentTagret;
+        // targetScreenObjects[target_id] = object;
 
         scene.add(object);
 
@@ -339,6 +360,7 @@ function render() {
             if (INTERSECTED && INTERSECTED.material.emissive) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 
             INTERSECTED = intersects[0].object;
+            var current_id = INTERSECTED.id;
             INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
             INTERSECTED.material.emissive.setHex(0xff0000);
 
@@ -399,6 +421,7 @@ function render() {
 
 // this function resets the view when the game starts
 function resetToDisplay() {
+
     SCREEN_HEIGHT = window.innerHeight;
     SCREEN_WIDTH = window.innerWidth;
 
@@ -419,11 +442,83 @@ function onDocumentMouseMove(event) {
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
 }
-function drawShip() {
-        var canvas = document.getElementById('the-canvas');
-        var ctx = canvas.getContext('2d');
-        var ship = document.getElementById('death-star');
-        ctx.drawImage(ship, 5, 5);
+
+// fire event functions
+var objectTokill = null;
+function callFire() {
+
+    // fire torpedo function
+    initTorpedo();
+
+    // kill the object is its on target
+    var current_id = INTERSECTED.id;
+    var isRealTarget = visualTargetIds[current_id];
+
+    if (isRealTarget) {
+
+        visualTargetIds[current_id] = false;
+        objectTokill = INTERSECTED;
+
+        setTimeout(function () {
+            delayKill();
+        }, fireDelayIndex);
+    }
+
+    //scene.remove(INTERSECTED);
+
+    INTERSECTED = null;
+    var t = 5;
 }
-	
+
+function delayKill(current_id) {
+
+    scene.remove(objectTokill);
+    INTERSECTED = objectTokill = null;
+
+}
+
+function initTorpedo() {
+
+    var posX = camera.position.x;
+    var posY = camera.position.y;
+    var posZ = camera.position.z;
+
+    var rotX = camera.rotation.x;
+    var rotY = camera.rotation.y;
+    var rotZ = camera.rotation.z;
+
+    var geometry = new THREE.CubeGeometry(30, 30, 30);
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+
+    object.position.x = Math.random() * 80000;
+    object.position.y = Math.random() * 80000;
+    object.position.z = Math.random() * 80000;
+
+    scene.add(object);
+
+}
+
+//function coordsInit() {
+//    setTimeout(function () {
+//        coordsInitReal();
+//    }, 2000);
+//}
+
+// on spacebar pressed
+$(window).keypress(function (e) {
+    if (e.which === 32) {
+        callFire();
+    }
+});
+
+
+function drawShip() {
+
+    var canvas = document.getElementById('the-canvas');
+    var ctx = canvas.getContext('2d');
+    var ship = document.getElementById('death-star');
+    ctx.drawImage(ship, 5, 5);
+}
+
+
 //}());
