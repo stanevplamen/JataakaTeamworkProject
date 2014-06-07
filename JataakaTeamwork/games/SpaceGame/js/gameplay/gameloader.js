@@ -23,6 +23,7 @@ window.onload = function () {
 
     clock = new THREE.Clock();
 
+	drawShip();
     init();
     animate();
     resetToDisplay();
@@ -418,6 +419,11 @@ function onDocumentMouseMove(event) {
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
 }
-
-
+function drawShip() {
+        var canvas = document.getElementById('the-canvas');
+        var ctx = canvas.getContext('2d');
+        var ship = document.getElementById('death-star');
+        ctx.drawImage(ship, 5, 5);
+}
+	
 //}());
