@@ -62,6 +62,10 @@ var fireDelayIndex = 1000;
 // special objects to find the intersections
 var projector, raycaster;
 
+// structures to fast get the object coordinates -> kill check
+var coordsX = {};
+var coordsY = {};
+
 // This is the main initialization function
 // Loads the three.js 3D envinronment
 // Load the vusualization space and objects
@@ -278,7 +282,7 @@ function init() {
         // var isalive = true;
         // var currentTagret = new Target(target_id, object, isalive);
         // targetsDictionary[target_id] = currentTagret;
-        // targetScreenObjects[target_id] = object;
+        targetScreenObjects[target_id] = object;
 
         scene.add(object);
 
@@ -286,7 +290,7 @@ function init() {
 
     projector = new THREE.Projector();
     raycaster = new THREE.Raycaster();
-
+  
     renderer = new THREE.WebGLRenderer({ alpha: false });
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     renderer.sortObjects = false;
@@ -342,9 +346,37 @@ function animate() {
 
 };
 
+function checkForShipCollisions() {
+
+    var cx = camera.position.x;
+    var cy = camera.position.y;
+    var cz = camera.position.y;
+
+    if (cx != 0 && cy != 0 && cz != 0) {
+
+        for (var a in  targetScreenObjects) {
+
+            var currentTarget = targetScreenObjects[a];
+
+            if (currentTarget.position) {
+
+                var ix = currentTarget.position.x;
+                var iy = currentTarget.position.y;
+
+                var ax = Math.abs(cx - ix);
+                var ay = Math.abs(cy - iy);
+                if (ax < 80 && ay < 80) {
+                    alert('boom');
+                }
+            }
+        }
+    }
+}
+
 function render() {
 
     // find intersections between the mouse cursor and the present 3D objects
+    //checkForShipCollisions();
 
     var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
     projector.unprojectVector(vector, camera);
@@ -360,10 +392,13 @@ function render() {
             if (INTERSECTED && INTERSECTED.material.emissive) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 
             INTERSECTED = intersects[0].object;
-            var current_id = INTERSECTED.id;
-            INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-            INTERSECTED.material.emissive.setHex(0xff0000);
 
+            if (INTERSECTED.id) {
+
+                var current_id = INTERSECTED.id;
+                INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+                INTERSECTED.material.emissive.setHex(0xff0000);
+            }
         }
 
     } else {
@@ -489,27 +524,29 @@ function callFire() {
     // fire torpedo function
     initMissile();
 
-    // kill the object is its on target
-    var current_id = INTERSECTED.id;
-    var isRealTarget = visualTargetIds[current_id];
+    if (INTERSECTED && INTERSECTED.id) {
 
-    if (isRealTarget) {
+        // kill the object is its on target
+        var current_id = INTERSECTED.id;
+        var isRealTarget = visualTargetIds[current_id];
 
-        visualTargetIds[current_id] = false;
-        objectTokill = INTERSECTED;
+        if (isRealTarget) {
 
-        INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-        INTERSECTED.material.emissive.setHex(0xffffff);
+            visualTargetIds[current_id] = false;
+            objectTokill = INTERSECTED;
 
-        setTimeout(function () {
-            delayKill();
-        }, fireDelayIndex);
+            INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+            INTERSECTED.material.emissive.setHex(0xffffff);
+
+            setTimeout(function () {
+                delayKill();
+            }, fireDelayIndex);
+        }
+
+        //scene.remove(INTERSECTED);
+
+        INTERSECTED = null;
     }
-
-    //scene.remove(INTERSECTED);
-
-    INTERSECTED = null;
-    var t = 5;
 }
 
 // physycal removement of the kiled object
@@ -610,6 +647,7 @@ function createDynamicTargets(adX, adY, adZ) {
         object.scale.z = Math.random() + 0.5;
 
         object.id = target_id;
+        targetScreenObjects[target_id] = object;
 
         //  indicates that the element is real target
         visualTargetIds[target_id] = true;
