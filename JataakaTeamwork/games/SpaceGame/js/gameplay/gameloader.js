@@ -27,6 +27,7 @@ window.onload = function () {
     init();
     animate();
     resetToDisplay();
+    dynamicCreateTargetsInit();
 };
 
 // global variables
@@ -92,6 +93,8 @@ function init() {
     controls.rollSpeed = Math.PI / 24;
     controls.autoForward = false;
     controls.dragToLook = false;
+    controls.minDistance = 0;
+    controls.maxDistance = 150000;
 
     /// visual objects and effects
     dirLight = new THREE.DirectionalLight(0xffffff);
@@ -376,7 +379,8 @@ function checkForShipCollisions() {
 function render() {
 
     // find intersections between the mouse cursor and the present 3D objects
-    //checkForShipCollisions();
+    // uncoment the function to test it
+    checkForShipCollisions();
 
     var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
     projector.unprojectVector(vector, camera);
@@ -457,29 +461,6 @@ function render() {
         currentMissile.position.x += additionX / 10;
         currentMissile.position.y += additionY / 10;
         currentMissile.position.z += additionZ / 10;
-
-    }
-
-    // checking for dynamic new targets initialization
-
-    var cx = camera.position.x;
-    var cy = camera.position.y;
-    var cz = camera.position.z;
-
-    if (globalCx && globalCy && globalCz) {
-
-        var adX = cx - globalCx;
-        var adY = cy - globalCy;
-        var adZ = cz - globalCz;
-
-        if (adX > 600 || adY > 600 || adZ > 600 || adX < -600 || adY < -600 || adZ < -600) {
-
-            var newX = cx + adX * 300;
-            var newY = cy + adY * 300;
-            var newZ = cz + adZ * 300;
-     
-            createDynamicTargets(newX, newY, newZ);
-        }
     }
 
     controls.movementSpeed = 0.33 * d;
@@ -487,8 +468,6 @@ function render() {
 
     renderer.clear();
     composer.render(delta);
-
-    globalCx = cx; globalCy = cy; globalCz = cz;
 };
 
 var globalCx, globalCy, globalCz;
@@ -598,11 +577,11 @@ function initMissile() {
 }
 
 
-//function coordsInit() {
-//    setTimeout(function () {
-//        coordsInitReal();
-//    }, 2000);
-//}
+function coordsInit() {
+    setTimeout(function () {
+        coordsInitReal();
+    }, 2000);
+}
 
 // on spacebar pressed
 $(window).keypress(function (e) {
@@ -624,37 +603,56 @@ function clearMissiles() {
     missilesObjects.length = 0;
 }
 
-function createDynamicTargets(adX, adY, adZ) {
+// creates target elements each 5 seconds
+function createDynamicTargets() {
 
-    var geometry = new THREE.CubeGeometry(500, 500, 500);
+    var geometry = new THREE.CubeGeometry(10000, 10000, 10000);
+    var cx = camera.position.x;
+    var cy = camera.position.y;
+    var cz = camera.position.z;
 
-    for (var i = 0; i < 2; i++) {
+    if (globalCx && globalCy && globalCz) {
 
-        targetIdCounter++;
-        var target_id = 'target' + targetIdCounter;
-        var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
-        object.position.x = Math.random() * adX;
-        object.position.y = Math.random() * adY;
-        object.position.z = Math.random() * adZ;
+        if (true) {
 
-        object.rotation.x = Math.random() * 2 * Math.PI;
-        object.rotation.y = Math.random() * 2 * Math.PI;
-        object.rotation.z = Math.random() * 2 * Math.PI;
+            var newX = cx + 10000;
+            var newY = cy + 10000;
+            var newZ = cz + 10000;
 
-        object.scale.x = Math.random() + 0.5;
-        object.scale.y = Math.random() + 0.5;
-        object.scale.z = Math.random() + 0.5;
+            for (var i = 0; i < 30; i++) {
 
-        object.id = target_id;
-        targetScreenObjects[target_id] = object;
+                targetIdCounter++;
+                var target_id = 'target' + targetIdCounter;
+                var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
-        //  indicates that the element is real target
-        visualTargetIds[target_id] = true;
+                object.position.x = Math.random() * newX;
+                object.position.y = Math.random() * newY;
+                object.position.z = Math.random() * newZ;
 
-        scene.add(object);
+                object.rotation.x = Math.random() * 2 * Math.PI;
+                object.rotation.y = Math.random() * 2 * Math.PI;
+                object.rotation.z = Math.random() * 2 * Math.PI;
 
+                object.scale.x = Math.random() + 0.5;
+                object.scale.y = Math.random() + 0.5;
+                object.scale.z = Math.random() + 0.5;
+
+                object.id = target_id;
+                targetScreenObjects[target_id] = object;
+
+                //  indicates that the element is real target
+                visualTargetIds[target_id] = true;
+
+                scene.add(object);
+            }
+        }
     }
+}
+
+function dynamicCreateTargetsInit() {
+
+    var intervalID = setInterval(function () { createDynamicTargets(); }, 5000);
 }
 
 // drawing of the spaceship cabin
