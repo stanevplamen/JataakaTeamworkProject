@@ -251,7 +251,7 @@ function init() {
 
     var geometry = new THREE.CubeGeometry(200, 200, 200);
 
-    for (var i = 0; i < 400; i++) {
+    for (var i = 0; i < 600; i++) {
 
         targetIdCounter++;
         var target_id = 'target' + targetIdCounter;
@@ -425,13 +425,38 @@ function render() {
 
     }
 
+    // checking for dynamic new targets initialization
+
+    var cx = camera.position.x;
+    var cy = camera.position.y;
+    var cz = camera.position.z;
+
+    if (globalCx && globalCy && globalCz) {
+
+        var adX = cx - globalCx;
+        var adY = cy - globalCy;
+        var adZ = cz - globalCz;
+
+        if (adX > 600 || adY > 600 || adZ > 600 || adX < -600 || adY < -600 || adZ < -600) {
+
+            var newX = cx + adX * 300;
+            var newY = cy + adY * 300;
+            var newZ = cz + adZ * 300;
+     
+            createDynamicTargets(newX, newY, newZ);
+        }
+    }
+
     controls.movementSpeed = 0.33 * d;
     controls.update(delta);
 
     renderer.clear();
     composer.render(delta);
 
+    globalCx = cx; globalCy = cy; globalCz = cz;
 };
+
+var globalCx, globalCy, globalCz;
 
 // this function resets the view when the game starts
 function resetToDisplay() {
@@ -473,6 +498,9 @@ function callFire() {
         visualTargetIds[current_id] = false;
         objectTokill = INTERSECTED;
 
+        INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+        INTERSECTED.material.emissive.setHex(0xffffff);
+
         setTimeout(function () {
             delayKill();
         }, fireDelayIndex);
@@ -484,17 +512,18 @@ function callFire() {
     var t = 5;
 }
 
+// physycal removement of the kiled object
 function delayKill(current_id) {
 
     scene.remove(objectTokill);
     INTERSECTED = objectTokill = null;
-
 }
 
 var additionX;
 var additionY;
 var additionZ;
 var missilesObjects = [];
+// making the missile objects
 function initMissile() {
 
     var posX = camera.position.x;
@@ -513,7 +542,7 @@ function initMissile() {
 
         var geometry = new THREE.CubeGeometry(80, 80, 80);
 
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 2; i++) {
 
             var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
@@ -545,6 +574,8 @@ $(window).keypress(function (e) {
     }
 });
 
+// deleting the missiles from the screen
+// clearing the missile stricture
 function clearMissiles() {
 
     for (var a in missilesObjects) {
@@ -556,6 +587,39 @@ function clearMissiles() {
     missilesObjects.length = 0;
 }
 
+function createDynamicTargets(adX, adY, adZ) {
+
+    var geometry = new THREE.CubeGeometry(500, 500, 500);
+
+    for (var i = 0; i < 2; i++) {
+
+        targetIdCounter++;
+        var target_id = 'target' + targetIdCounter;
+        var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+
+        object.position.x = Math.random() * adX;
+        object.position.y = Math.random() * adY;
+        object.position.z = Math.random() * adZ;
+
+        object.rotation.x = Math.random() * 2 * Math.PI;
+        object.rotation.y = Math.random() * 2 * Math.PI;
+        object.rotation.z = Math.random() * 2 * Math.PI;
+
+        object.scale.x = Math.random() + 0.5;
+        object.scale.y = Math.random() + 0.5;
+        object.scale.z = Math.random() + 0.5;
+
+        object.id = target_id;
+
+        //  indicates that the element is real target
+        visualTargetIds[target_id] = true;
+
+        scene.add(object);
+
+    }
+}
+
+// drawing of the spaceship cabin
 function drawShip() {
 
     var canvas = document.getElementById('the-canvas');
