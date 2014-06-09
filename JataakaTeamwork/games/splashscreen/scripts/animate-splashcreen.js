@@ -20,12 +20,15 @@
     setTimeout(function () {
         small.fadeIn(1000);
         var doc = $(document);
+
         doc.on('click', function () {
             title.fadeOut(2000);
             doc.off('click');
             win.off('resize');
+
             centerMenuWrapper();
             win.resize(centerMenuWrapper);
+
             menuWrapper.fadeIn(6500);
             small.fadeOut(1000);
         });
@@ -34,7 +37,6 @@
     function centerMenuWrapper() {
         var winWidth = win.width();
         var winHeight = win.height();
-
         menuWrapper.height(winHeight);
         menuWrapper.width(winWidth);
     }
