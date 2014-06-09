@@ -5,6 +5,8 @@
 
 body {
 
+    @default-font-col: #fff;
+
     .diag-gradient(@col1: #000, @col2: #fff, @pos1: 79%, @pos2: 100%) {
         background: @col1;
         background: -moz-linear-gradient(-45deg, @col1 @pos1, @col2 @pos2);
@@ -18,8 +20,7 @@ body {
     }
 
     .diag-gradient(#000, #fff, 80%, 100%);
-
-    color: #fff;
+    color: @default-font-col;
 
     #start-screen-wrapper {
         position: absolute;
@@ -39,13 +40,13 @@ body {
 
     #menu-wrapper {
         display: none;
-        /*border: 1px solid green;*/
-        margin: 20px;
-        color: #fff;
+        border: 1px solid green;
+        color: @default-font-col;
         padding: 15px;
+        background-image: url(/splashscreen/imgs/earth-from-space.png);
 
         a {
-            color: #fff;
+            color: @default-font-col;
             text-decoration: none;
             display: block;
             text-align: center;

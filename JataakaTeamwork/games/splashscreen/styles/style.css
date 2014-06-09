@@ -12,7 +12,7 @@ body {
   background: linear-gradient(135deg, #000000 80%, #ffffff 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@col1', endColorstr='@col2', GradientType=1);
   background-attachment: fixed;
-  color: #fff;
+  color: #ffffff;
 }
 body #start-screen-wrapper {
   position: absolute;
@@ -29,13 +29,13 @@ body #start-screen-wrapper small {
 }
 body #menu-wrapper {
   display: none;
-  /*border: 1px solid green;*/
-  margin: 20px;
-  color: #fff;
+  border: 1px solid green;
+  color: #ffffff;
   padding: 15px;
+  background-image: url(/splashscreen/imgs/earth-from-space.png);
 }
 body #menu-wrapper a {
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
   display: block;
   text-align: center;

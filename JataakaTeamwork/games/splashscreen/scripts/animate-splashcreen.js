@@ -3,6 +3,8 @@
     var presents = $('#presents');
     var title = presents.next();
     var small = title.next();
+    var win = $(window);
+    var menuWrapper = $('#menu-wrapper');
 
     presents.css('display', 'block').hide();
     title.css('display', 'block').hide();
@@ -21,8 +23,19 @@
         doc.on('click', function () {
             title.fadeOut(2000);
             doc.off('click');
-            $('#menu-wrapper').fadeIn(6500);
+            win.off('resize');
+            centerMenuWrapper();
+            win.resize(centerMenuWrapper);
+            menuWrapper.fadeIn(6500);
             small.fadeOut(1000);
         });
     }, 9500)
+
+    function centerMenuWrapper() {
+        var winWidth = win.width();
+        var winHeight = win.height();
+
+        menuWrapper.height(winHeight);
+        menuWrapper.width(winWidth);
+    }
 })()
