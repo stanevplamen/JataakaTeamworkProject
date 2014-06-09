@@ -79,7 +79,7 @@ function init() {
 
     // viwer position details initializing
     camera = new THREE.PerspectiveCamera(25, SCREEN_WIDTH / SCREEN_HEIGHT, 50, 1e7);
-    camera.position.z = radius * 15;
+    camera.position.z = radius * 100;
 
     // main container for the visual objects
     scene = new THREE.Scene();
@@ -93,8 +93,8 @@ function init() {
     controls.rollSpeed = Math.PI / 24;
     controls.autoForward = false;
     controls.dragToLook = false;
-    controls.minDistance = 0;
-    controls.maxDistance = 150000;
+    //controls.minDistance = 0;
+    //controls.maxDistance = 30000;
 
     /// visual objects and effects
     dirLight = new THREE.DirectionalLight(0xffffff);
@@ -202,7 +202,7 @@ function init() {
 
     var i, r = radius, starsGeometry = [new THREE.Geometry(), new THREE.Geometry()];
 
-    for (i = 0; i < 500; i++) {
+    for (i = 0; i < 1500; i++) {
 
         var vertex = new THREE.Vector3();
         vertex.x = Math.random() * 2 - 1;
@@ -232,7 +232,7 @@ function init() {
         new THREE.ParticleSystemMaterial({ color: 0x555555, size: 4, sizeAttenuation: false }),
         new THREE.ParticleSystemMaterial({ color: 0x333333, size: 3, sizeAttenuation: false }),
         new THREE.ParticleSystemMaterial({ color: 0x3a3a3a, size: 2, sizeAttenuation: false }),
-        new THREE.ParticleSystemMaterial({ color: 0x1a1a1a, size: 1, sizeAttenuation: false }),
+        new THREE.ParticleSystemMaterial({ color: 0xffffff, size: 1, sizeAttenuation: false }),
         new THREE.ParticleSystemMaterial({ color: 0x1a1a1a, size: 2, sizeAttenuation: false })
     ];
 
@@ -256,17 +256,17 @@ function init() {
 
     /// new cubes for target using
 
-    var geometry = new THREE.CubeGeometry(200, 200, 200);
+    var geometry = new THREE.CubeGeometry(400, 400, 400);
 
-    for (var i = 0; i < 600; i++) {
+    for (var i = 0; i < 1600; i++) {
 
         targetIdCounter++;
         var target_id = 'target' + targetIdCounter;
         var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
-        object.position.x = Math.random() * 80000;
-        object.position.y = Math.random() * 80000;
-        object.position.z = Math.random() * 80000;
+        object.position.x = Math.random() * 1100000;
+        object.position.y = Math.random() * 1100000;
+        object.position.z = Math.random() * 1100000;
 
         object.rotation.x = Math.random() * 2 * Math.PI;
         object.rotation.y = Math.random() * 2 * Math.PI;
@@ -376,11 +376,33 @@ function checkForShipCollisions() {
     }
 }
 
+function checkCameraLimits() {
+
+    var cx = Math.abs(camera.position.x);
+    var cy = Math.abs(camera.position.y);
+    var cz = Math.abs(camera.position.z);
+
+    console.log(cx);
+    console.log(cy);
+    console.log(cz);
+
+    if (cx > 800000 || cy > 800000 || cz > 800000) {
+
+        camera.position.x = 0;
+        camera.position.y = 0;
+        camera.position.z = 637100;
+
+        camera.lookAt(new THREE.Vector3(0.0, 0.0, 0.0));
+
+    }
+}
+
 function render() {
 
     // find intersections between the mouse cursor and the present 3D objects
     // uncoment the function to test it
     checkForShipCollisions();
+    checkCameraLimits();
 
     var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
     projector.unprojectVector(vector, camera);
@@ -626,9 +648,9 @@ function createDynamicTargets() {
                 var target_id = 'target' + targetIdCounter;
                 var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
-                object.position.x = Math.random() * newX;
-                object.position.y = Math.random() * newY;
-                object.position.z = Math.random() * newZ;
+                object.position.x = Math.random() * newX * 5;
+                object.position.y = Math.random() * newY * 5;
+                object.position.z = Math.random() * newZ * 5;
 
                 object.rotation.x = Math.random() * 2 * Math.PI;
                 object.rotation.y = Math.random() * 2 * Math.PI;
