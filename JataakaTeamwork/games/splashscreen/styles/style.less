@@ -17,7 +17,9 @@ body {
         background-attachment: fixed;
     }
 
-    .diag-gradient(#000, #fff, 73%, 100%);
+    .diag-gradient(#000, #fff, 80%, 100%);
+
+    color: #fff;
 
     #start-screen-wrapper {
         position: absolute;
@@ -25,6 +27,48 @@ body {
 
         img {
             margin: 0 auto;
+            display: block;
+        }
+
+        small {
+            display: none;
+            margin: 0 auto;
+            width: 120px;
+        }
+    }
+
+    #menu-wrapper {
+        display: none;
+        /*border: 1px solid green;*/
+        margin: 20px;
+        color: #fff;
+        padding: 15px;
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        ul {
+            /*border: 1px solid blue;*/
+            list-style-type: none;
+            margin: 0 auto;
+            width: 350px;
+
+            li {
+                border: 3px outset #2d36d1;
+                border-radius: 8px;
+                display: inline-block;
+                height: 20px;
+                width: 100px;
+                margin-right: 5px;
+
+                .li-item-content {
+                    display: none;
+                }
+            }
         }
     }
 }
