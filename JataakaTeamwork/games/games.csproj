@@ -62,6 +62,7 @@
     <Content Include="SpaceGame\js\system\libs\jquery-2.0.2.js" />
     <Content Include="SpaceGame\textures\planets\death_star.png" />
     <Content Include="SpaceGame\textures\planets\Thumbs.db" />
+    <Content Include="splashscreen\styles\style.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -90,6 +91,15 @@
     <Content Include="SpaceGame\textures\planets\earth_normal_2048.jpg" />
     <Content Include="SpaceGame\textures\planets\earth_specular_2048.jpg" />
     <Content Include="SpaceGame\textures\planets\moon_1024.jpg" />
+    <Content Include="splashscreen\imgs\jataaka-presents-blue-blend.png" />
+    <Content Include="splashscreen\imgs\jataaka-presents-blue.png" />
+    <Content Include="splashscreen\imgs\title-blend.png" />
+    <Content Include="splashscreen\scripts\animate-splashcreen.js" />
+    <Content Include="splashscreen\scripts\jquery-2.1.1.min.js" />
+    <Content Include="splashscreen\scripts\script.js" />
+    <Content Include="splashscreen\splashscreen.html" />
+    <Content Include="splashscreen\styles\style.css" />
+    <Content Include="splashscreen\styles\style.min.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
