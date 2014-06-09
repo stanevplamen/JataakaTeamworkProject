@@ -29,7 +29,6 @@ body #start-screen-wrapper small {
 }
 body #menu-wrapper {
   display: none;
-  border: 1px solid green;
   color: #ffffff;
   padding: 15px;
   background-image: url(/splashscreen/imgs/earth-from-space.png);
@@ -41,7 +40,6 @@ body #menu-wrapper a {
   text-align: center;
 }
 body #menu-wrapper ul {
-  /*border: 1px solid blue;*/
   list-style-type: none;
   margin: 0 auto;
   width: 350px;
