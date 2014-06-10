@@ -389,6 +389,7 @@ function checkForShipCollisions() {
                 var ay = Math.abs(cy - iy);
                 if (ax < 80 && ay < 80) {
                     alert('boom');
+                    playSound(explodeSound, 0.45);
                 }
             }
         }
@@ -540,6 +541,7 @@ var objectTokill = null;
 function callFire() {
 
     // fire torpedo function
+    playSound(blasterSound, 0.03);
     initMissile();
 
     if (INTERSECTED && INTERSECTED.id) {
@@ -658,7 +660,7 @@ function createDynamicTargets() {
             var newY = cy - globalCy;
             var newZ = cz - globalCz;
 
-            for (var i = 0; i < 50; i++) {
+            for (var i = 0; i < 30; i++) {
 
                 targetIdCounter++;
                 var target_id = 'target' + targetIdCounter;
@@ -692,7 +694,7 @@ function createDynamicTargets() {
 
 function dynamicCreateTargetsInit() {
 
-    var intervalID = setInterval(function () { createDynamicTargets(); }, 5000);
+    var intervalID = setInterval(function () { createDynamicTargets(); }, 3000);
 }
 
 // drawing of the spaceship cabin

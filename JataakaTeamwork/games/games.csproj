@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SpaceGame\js\gameplay\Classes\Class.js" />
+    <Content Include="SpaceGame\js\gameplay\Classes\snd.js" />
     <Content Include="SpaceGame\js\gameplay\Classes\Target.js" />
     <Content Include="SpaceGame\js\system\libs\jquery-2.0.2.js" />
     <Content Include="SpaceGame\textures\planets\cockpit.png" />
@@ -73,6 +74,9 @@
     <Content Include="splashscreen\scripts\animate-button-contents.js" />
     <Content Include="splashscreen\scripts\common-variables.js" />
     <Content Include="splashscreen\styles\style.less" />
+    <Content Include="SpaceGame\snd\blaster.ogg" />
+    <Content Include="SpaceGame\snd\explode.ogg" />
+    <Content Include="SpaceGame\snd\music.ogg" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
