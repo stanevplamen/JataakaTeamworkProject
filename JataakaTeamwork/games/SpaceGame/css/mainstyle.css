@@ -22,6 +22,20 @@
     height: 100%;
 }
 
+#ship-stats{
+    padding:5px;
+    text-align:left;
+    font-family:'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
+    width:165px;
+    height:100px;
+    position:absolute;
+    top:470px;
+    left:596px;
+    background:blue;
+    color:white;
+    z-index:101;
+}
+
 #cabin{
     display: none;
 }
