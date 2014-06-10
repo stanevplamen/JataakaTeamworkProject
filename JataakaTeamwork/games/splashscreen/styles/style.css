@@ -95,6 +95,7 @@ body #menu-wrapper ul li .li-item-content {
   height: 100%;
   width: 100%;
   padding: 25px 0;
+  overflow: auto;
 }
 body #menu-wrapper ul li .li-item-content img {
   width: 100px;
@@ -107,7 +108,6 @@ body #menu-wrapper ul li .li-item-content img {
 body #menu-wrapper ul li .li-item-content #authors-wrapper {
   width: 800px;
   margin: auto;
-  margin-top: 85px;
   height: 75%;
   overflow: auto;
 }
