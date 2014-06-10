@@ -256,17 +256,17 @@ function init() {
 
     /// new cubes for target using
 
-    var geometry = new THREE.CubeGeometry(400, 400, 400);
+    var geometry = new THREE.CubeGeometry(600, 600, 600);
 
-    for (var i = 0; i < 1600; i++) {
+    for (var i = 0; i < 500; i++) {
 
         targetIdCounter++;
         var target_id = 'target' + targetIdCounter;
         var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
-        object.position.x = Math.random() * 1100000;
-        object.position.y = Math.random() * 1100000;
-        object.position.z = Math.random() * 1100000;
+        object.position.x = 200000 * getRandomArbitrary(0.5, 4);
+        object.position.y = 200000 * getRandomArbitrary(0.5, 4);
+        object.position.z = 200000 * getRandomArbitrary(0.5, 4);
 
         object.rotation.x = Math.random() * 2 * Math.PI;
         object.rotation.y = Math.random() * 2 * Math.PI;
@@ -281,14 +281,33 @@ function init() {
         //  indicates that the element is real target
         visualTargetIds[target_id] = true;
 
-        // the connection is visual object from scene - > in the targetsDictionary via the Target class instance
-        // var isalive = true;
-        // var currentTagret = new Target(target_id, object, isalive);
-        // targetsDictionary[target_id] = currentTagret;
         targetScreenObjects[target_id] = object;
 
         scene.add(object);
+    }
 
+    for (var i = 0; i < 1000; i++) {
+
+        targetIdCounter++;
+        var target_id = 'target' + targetIdCounter;
+        var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+
+        object.position.x = 200000 * Math.random();
+        object.position.y = 200000 * Math.random();
+        object.position.z = 200000 * Math.random();
+
+        object.id = target_id;
+
+        //  indicates that the element is real target
+        visualTargetIds[target_id] = true;
+
+        targetScreenObjects[target_id] = object;
+
+        scene.add(object);
+    }
+
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
     }
 
     projector = new THREE.Projector();
@@ -382,9 +401,9 @@ function checkCameraLimits() {
     var cy = Math.abs(camera.position.y);
     var cz = Math.abs(camera.position.z);
 
-    console.log(cx);
-    console.log(cy);
-    console.log(cz);
+    //console.log(cx);
+    //console.log(cy);
+    //console.log(cz);
 
     if (cx > 800000 || cy > 800000 || cz > 800000) {
 
@@ -393,14 +412,12 @@ function checkCameraLimits() {
         camera.position.z = 637100;
 
         camera.lookAt(new THREE.Vector3(0.0, 0.0, 0.0));
-
     }
 }
 
 function render() {
 
     // find intersections between the mouse cursor and the present 3D objects
-    // uncoment the function to test it
     checkForShipCollisions();
     checkCameraLimits();
 
@@ -628,29 +645,28 @@ function clearMissiles() {
 // creates target elements each 5 seconds
 function createDynamicTargets() {
 
-    var geometry = new THREE.CubeGeometry(10000, 10000, 10000);
+    var geometry = new THREE.CubeGeometry(900, 900, 900);
     var cx = camera.position.x;
     var cy = camera.position.y;
     var cz = camera.position.z;
 
     if (globalCx && globalCy && globalCz) {
 
-
         if (true) {
 
-            var newX = cx + 10000;
-            var newY = cy + 10000;
-            var newZ = cz + 10000;
+            var newX = cx - globalCx;
+            var newY = cy - globalCy;
+            var newZ = cz - globalCz;
 
-            for (var i = 0; i < 30; i++) {
+            for (var i = 0; i < 50; i++) {
 
                 targetIdCounter++;
                 var target_id = 'target' + targetIdCounter;
                 var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
-                object.position.x = Math.random() * newX * 5;
-                object.position.y = Math.random() * newY * 5;
-                object.position.z = Math.random() * newZ * 5;
+                object.position.x = Math.random() * newX * 70;
+                object.position.y = Math.random() * newY * 70;
+                object.position.z = Math.random() * newZ * 70;
 
                 object.rotation.x = Math.random() * 2 * Math.PI;
                 object.rotation.y = Math.random() * 2 * Math.PI;
@@ -670,6 +686,8 @@ function createDynamicTargets() {
             }
         }
     }
+
+    globalCx = cx; globalCy = cy; globalCz = cz;
 }
 
 function dynamicCreateTargetsInit() {
