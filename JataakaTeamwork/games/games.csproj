@@ -63,7 +63,15 @@
     <Content Include="SpaceGame\textures\planets\cockpit.png" />
     <Content Include="SpaceGame\textures\planets\death_star.png" />
     <Content Include="SpaceGame\textures\planets\Thumbs.db" />
+    <Content Include="splashscreen\imgs\authors\georgi-prodanov.jpg" />
+    <Content Include="splashscreen\imgs\authors\georgis-andonis.jpg" />
+    <Content Include="splashscreen\imgs\authors\konstantin-severi.jpg" />
+    <Content Include="splashscreen\imgs\authors\plamen-georgiev.jpg" />
+    <Content Include="splashscreen\imgs\authors\plamen-stanev.jpg" />
+    <Content Include="splashscreen\imgs\authors\svetoslav-georgiev.jpg" />
     <Content Include="splashscreen\imgs\earth-from-space.png" />
+    <Content Include="splashscreen\scripts\animate-button-contents.js" />
+    <Content Include="splashscreen\scripts\common-variables.js" />
     <Content Include="splashscreen\styles\style.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -98,7 +106,7 @@
     <Content Include="splashscreen\imgs\title-blend.png" />
     <Content Include="splashscreen\scripts\animate-splashcreen.js" />
     <Content Include="splashscreen\scripts\jquery-2.1.1.min.js" />
-    <Content Include="splashscreen\scripts\script.js" />
+    <Content Include="splashscreen\scripts\center-splashscreen.js" />
     <Content Include="splashscreen\splashscreen.html" />
     <Content Include="splashscreen\styles\style.css" />
     <Content Include="splashscreen\styles\style.min.css" />
