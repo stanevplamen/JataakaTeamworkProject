@@ -1,0 +1,5 @@
+C:\Users\Georgi\Documents\Visual Studio 2012\Projects\Telerik Academy\JataakaTeamworkProject\JataakaTeamwork\games\bin\games.dll
+C:\Users\Georgi\Documents\Visual Studio 2012\Projects\Telerik Academy\JataakaTeamworkProject\JataakaTeamwork\games\bin\games.pdb
+C:\Users\Georgi\Documents\Visual Studio 2012\Projects\Telerik Academy\JataakaTeamworkProject\JataakaTeamwork\games\obj\Debug\games.csprojResolveAssemblyReference.cache
+C:\Users\Georgi\Documents\Visual Studio 2012\Projects\Telerik Academy\JataakaTeamworkProject\JataakaTeamwork\games\obj\Debug\games.dll
+C:\Users\Georgi\Documents\Visual Studio 2012\Projects\Telerik Academy\JataakaTeamworkProject\JataakaTeamwork\games\obj\Debug\games.pdb
