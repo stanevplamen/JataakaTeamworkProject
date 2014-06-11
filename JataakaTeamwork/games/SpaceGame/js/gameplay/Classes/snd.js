@@ -32,7 +32,7 @@ function playSound (id, vol) {
 	if (!soundOn || Audio == undefined) {
 		return;
 	}
-	var volume = 1;
+	var volume = 3;
 	if (vol != undefined) {
 		volume = vol;
 	}
@@ -52,10 +52,10 @@ function playSound (id, vol) {
 
 if (Audio != undefined) {
 	// sounds
-	var blasterSound = new Audio("snd/blaster.ogg"/*tpa=http://oos.moxiecode.com/js_webgl/xwing/snd/blaster.ogg*/);
-	var explodeSound = new Audio("snd/explode.ogg"/*tpa=http://oos.moxiecode.com/js_webgl/xwing/snd/explode.ogg*/);
+	var blasterSound = new Audio("snd/blaster.ogg");
+	var explodeSound = new Audio("snd/explode.ogg");
 
-	var worldMusic = new Audio("snd/music.ogg"/*tpa=http://oos.moxiecode.com/js_webgl/xwing/snd/music.ogg*/);
+	var worldMusic = new Audio("snd/music.ogg");
 	worldMusic.volume = 0.1;
 	worldMusic.loop = true;
 	worldMusic.play();

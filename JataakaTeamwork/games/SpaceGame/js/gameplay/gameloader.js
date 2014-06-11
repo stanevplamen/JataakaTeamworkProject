@@ -55,7 +55,7 @@ var clock;
 // this is a container for the current game targets 
 // searching by target_id -> (to get) the target (by its id)
 var targetsDictionary = {};
-var targetScreenObjects = {}
+var targetScreenObjects = {};
 var visualTargetIds = {};
 var targetIdCounter = 1;
 var fireDelayIndex = 1000;
