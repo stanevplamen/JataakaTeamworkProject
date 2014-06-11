@@ -57,13 +57,47 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SpaceGame\css\mainstyle.css" />
+    <Content Include="SpaceGame\index.html" />
     <Content Include="SpaceGame\js\gameplay\Classes\Class.js" />
     <Content Include="SpaceGame\js\gameplay\Classes\snd.js" />
     <Content Include="SpaceGame\js\gameplay\Classes\Target.js" />
+    <Content Include="SpaceGame\js\gameplay\gameloader.js" />
+    <Content Include="SpaceGame\js\gameplay\images\lensflare0.png" />
+    <Content Include="SpaceGame\js\gameplay\images\lensflare0_alpha.png" />
+    <Content Include="SpaceGame\js\gameplay\models\Shuttle01\S01_512.jpg" />
+    <Content Include="SpaceGame\js\gameplay\models\Shuttle02\S02_512.jpg" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter01\F01_512.jpg" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter02\F02_512.jpg" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter02\SpaceFighter02.js" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter03\F03_512.jpg" />
+    <Content Include="SpaceGame\js\gameplay\Ships\MTLLoader.js" />
+    <Content Include="SpaceGame\js\gameplay\Ships\OBJLoader.js" />
+    <Content Include="SpaceGame\js\gameplay\Ships\OBJMTLLoader.js" />
+    <Content Include="SpaceGame\js\gameplay\Ships\package.require.js" />
+    <Content Include="SpaceGame\js\gameplay\Ships\threex.spaceships.js" />
+    <Content Include="SpaceGame\js\system\build\three.js" />
+    <Content Include="SpaceGame\js\system\build\three.min.js" />
+    <Content Include="SpaceGame\js\system\controls\FlyControls.js" />
+    <Content Include="SpaceGame\js\system\libs\Detector.js" />
     <Content Include="SpaceGame\js\system\libs\jquery-2.0.2.js" />
+    <Content Include="SpaceGame\js\system\libs\stats.min.js" />
+    <Content Include="SpaceGame\js\system\postprocessing\EffectComposer.js" />
+    <Content Include="SpaceGame\js\system\postprocessing\FilmPass.js" />
+    <Content Include="SpaceGame\js\system\postprocessing\MaskPass.js" />
+    <Content Include="SpaceGame\js\system\postprocessing\RenderPass.js" />
+    <Content Include="SpaceGame\js\system\postprocessing\ShaderPass.js" />
+    <Content Include="SpaceGame\js\system\shaders\CopyShader.js" />
+    <Content Include="SpaceGame\js\system\shaders\FilmShader.js" />
+    <Content Include="SpaceGame\textures\planets\cabin.png" />
     <Content Include="SpaceGame\textures\planets\cockpit.png" />
     <Content Include="SpaceGame\textures\planets\death_star.png" />
-    <Content Include="SpaceGame\textures\planets\Thumbs.db" />
+    <Content Include="SpaceGame\textures\planets\earth_atmos_2048.jpg" />
+    <Content Include="SpaceGame\textures\planets\earth_clouds_1024.png" />
+    <Content Include="SpaceGame\textures\planets\earth_normal_2048.jpg" />
+    <Content Include="SpaceGame\textures\planets\earth_specular_2048.jpg" />
+    <Content Include="SpaceGame\textures\planets\moon_1024.jpg" />
+    <Content Include="SpaceGame\textures\planets\venus_1024.jpg" />
     <Content Include="splashscreen\imgs\authors\georgi-prodanov.jpg" />
     <Content Include="splashscreen\imgs\authors\georgis-andonis.jpg" />
     <Content Include="splashscreen\imgs\authors\konstantin-severi.jpg" />
@@ -79,6 +113,25 @@
     <Content Include="SpaceGame\snd\blaster.ogg" />
     <Content Include="SpaceGame\snd\explode.ogg" />
     <Content Include="SpaceGame\snd\music.ogg" />
+    <Content Include="SpaceGame\textures\planets\Thumbs.db" />
+    <Content Include="SpaceGame\js\gameplay\models\Shuttle01\Shuttle01.3DS" />
+    <Content Include="SpaceGame\js\gameplay\models\Shuttle01\Shuttle01.max" />
+    <Content Include="SpaceGame\js\gameplay\models\Shuttle01\Shuttle01.mtl" />
+    <Content Include="SpaceGame\js\gameplay\models\Shuttle01\Shuttle01.obj" />
+    <Content Include="SpaceGame\js\gameplay\models\Shuttle02\Shuttle02.3DS" />
+    <Content Include="SpaceGame\js\gameplay\models\Shuttle02\Shuttle02.max" />
+    <Content Include="SpaceGame\js\gameplay\models\Shuttle02\Shuttle02.mtl" />
+    <Content Include="SpaceGame\js\gameplay\models\Shuttle02\Shuttle02.obj" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter01\SpaceFighter01.3ds" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter01\SpaceFighter01.max" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter01\SpaceFighter01.mtl" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter01\SpaceFighter01.obj" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter02\SpaceFighter02.3ds" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter02\SpaceFighter02.max" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter02\SpaceFighter02.mtl" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter02\SpaceFighter02.obj" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter03\SpaceFighter03.mtl" />
+    <Content Include="SpaceGame\js\gameplay\models\SpaceFighter03\SpaceFighter03.obj" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -87,26 +140,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SpaceGame\css\mainstyle.css" />
-    <Content Include="SpaceGame\index.html" />
-    <Content Include="SpaceGame\js\gameplay\gameloader.js" />
-    <Content Include="SpaceGame\js\system\build\three.js" />
-    <Content Include="SpaceGame\js\system\build\three.min.js" />
-    <Content Include="SpaceGame\js\system\controls\FlyControls.js" />
-    <Content Include="SpaceGame\js\system\libs\Detector.js" />
-    <Content Include="SpaceGame\js\system\libs\stats.min.js" />
-    <Content Include="SpaceGame\js\system\postprocessing\EffectComposer.js" />
-    <Content Include="SpaceGame\js\system\postprocessing\FilmPass.js" />
-    <Content Include="SpaceGame\js\system\postprocessing\MaskPass.js" />
-    <Content Include="SpaceGame\js\system\postprocessing\RenderPass.js" />
-    <Content Include="SpaceGame\js\system\postprocessing\ShaderPass.js" />
-    <Content Include="SpaceGame\js\system\shaders\CopyShader.js" />
-    <Content Include="SpaceGame\js\system\shaders\FilmShader.js" />
-    <Content Include="SpaceGame\textures\planets\earth_atmos_2048.jpg" />
-    <Content Include="SpaceGame\textures\planets\earth_clouds_1024.png" />
-    <Content Include="SpaceGame\textures\planets\earth_normal_2048.jpg" />
-    <Content Include="SpaceGame\textures\planets\earth_specular_2048.jpg" />
-    <Content Include="SpaceGame\textures\planets\moon_1024.jpg" />
     <Content Include="splashscreen\imgs\jataaka-presents-blue-blend.png" />
     <Content Include="splashscreen\imgs\jataaka-presents-blue.png" />
     <Content Include="splashscreen\imgs\title-blend.png" />

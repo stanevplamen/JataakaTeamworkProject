@@ -23,7 +23,7 @@ window.onload = function () {
 
     clock = new THREE.Clock();
 
-	drawShip();
+    drawShip();
     init();
     animate();
     resetToDisplay();
@@ -310,9 +310,13 @@ function init() {
         return Math.random() * (max - min) + min;
     }
 
+    // the enemy ships
+     createEnemyShips();
+
+
     projector = new THREE.Projector();
     raycaster = new THREE.Raycaster();
-  
+
     renderer = new THREE.WebGLRenderer({ alpha: false });
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     renderer.sortObjects = false;
@@ -345,6 +349,84 @@ function init() {
 
 };
 
+function createEnemyShips() {
+
+    ; (function () {
+        // add a ambient light
+        var light = new THREE.AmbientLight(0xff0000)
+        scene.add(light)
+        // add a light in front
+        var light = new THREE.DirectionalLight('white', 1)
+        light.position.set(0.5, 0.5, 2)
+        scene.add(light)
+        // add a light behind
+        var light = new THREE.DirectionalLight('white', 1)
+        light.position.set(-0.5, -0.5, -2)
+        scene.add(light)
+    })()
+
+    //////////////////////////////////////////////////////////////////////////////////
+    //		comment								//
+    //////////////////////////////////////////////////////////////////////////////////
+
+
+    THREEx.SpaceShips.loadSpaceFighter01(function (object3d) {
+        object3d.position.x = -1
+        object3d.position.y = 0.5
+        scene.add(object3d)
+    })
+
+    THREEx.SpaceShips.loadSpaceFighter02(function (object3d) {
+        object3d.position.x = 1
+        object3d.position.y = 0.5
+        scene.add(object3d)
+    })
+
+    THREEx.SpaceShips.loadSpaceFighter03(function (object3d) {
+        var spaceship = object3d;
+        spaceship.scale.set(10000, 10000, 10000);
+        scene.add(spaceship)
+
+        var shoot = new THREEx.SpaceShips.Shoot()
+        shoot.position.x = 0.5
+        shoot.position.z = 0.3
+        scene.add(shoot)
+
+        var shoot = new THREEx.SpaceShips.Shoot()
+        shoot.position.x = -0.5
+        shoot.position.z = 0.3
+        scene.add(shoot)
+
+        var detonation = new THREEx.SpaceShips.Detonation()
+        detonation.position.x = 0.5
+        detonation.position.z = 0.1
+        scene.add(detonation)
+
+        var detonation = new THREEx.SpaceShips.Detonation()
+        detonation.position.x = -0.5
+        detonation.position.z = 0.1
+        scene.add(detonation)
+
+        var light = new THREE.PointLight()
+        detonation.position.x = -0.5
+        detonation.position.z = 0.1
+
+        scene.add(light)
+    })
+
+    THREEx.SpaceShips.loadShuttle01(function (object3d) {
+        object3d.position.x = -1
+        object3d.position.y = -0.5
+        scene.add(object3d)
+    })
+
+    THREEx.SpaceShips.loadShuttle02(function (object3d) {
+        object3d.position.x = 1
+        object3d.position.y = -0.5
+        scene.add(object3d)
+    })
+}
+
 function onWindowResize(event) {
 
     SCREEN_HEIGHT = window.innerHeight;
@@ -376,7 +458,7 @@ function checkForShipCollisions() {
 
     if (cx != 0 && cy != 0 && cz != 0) {
 
-        for (var a in  targetScreenObjects) {
+        for (var a in targetScreenObjects) {
 
             var currentTarget = targetScreenObjects[a];
 
@@ -492,7 +574,7 @@ function render() {
 
     // moving the bullets
 
-    var mislength =  missilesObjects.length;
+    var mislength = missilesObjects.length;
 
     for (var i = 0; i < mislength; i++) {
 
@@ -541,7 +623,7 @@ var objectTokill = null;
 function callFire() {
 
     // fire torpedo function
-    playSound(blasterSound, 0.03);
+
     initMissile();
 
     if (INTERSECTED && INTERSECTED.id) {
@@ -552,6 +634,7 @@ function callFire() {
 
         if (isRealTarget) {
 
+            playSound(blasterSound, 0.03);
             visualTargetIds[current_id] = false;
             objectTokill = INTERSECTED;
 
@@ -574,6 +657,7 @@ function delayKill(current_id) {
 
     scene.remove(objectTokill);
     INTERSECTED = objectTokill = null;
+    playSound(explodeSound, 0.45);
 }
 
 var additionX;
@@ -702,7 +786,7 @@ function drawShip() {
 
     var canvas = document.getElementById('the-canvas');
     var ctx = canvas.getContext('2d');
-    var ship = document.getElementById('cabin');    
+    var ship = document.getElementById('cabin');
     ctx.drawImage(ship, 0, 0, canvas.width, canvas.height);
 }
 
