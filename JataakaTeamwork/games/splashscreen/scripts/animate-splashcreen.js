@@ -32,11 +32,13 @@
 
         doc.on('click', function () {
             menuSound.play();
+            title.attr('src', 'imgs/gos-blk-100-2-fix.png');
             small.fadeOut(1000);
 
             doc.off('click');
             win.off('resize');
 
+            title.fadeOut(2000);
             setTimeout(initializeMenu, 1000);
             createMuteButton();
         });
@@ -51,7 +53,6 @@
     }
 
     function initializeMenu() {
-        title.fadeOut(2000);
         centerMenuWrapper();
         win.resize(centerMenuWrapper);
         menuWrapper.fadeIn(6500);

@@ -105,6 +105,14 @@
     <Content Include="splashscreen\imgs\authors\plamen-stanev.jpg" />
     <Content Include="splashscreen\imgs\authors\svetoslav-georgiev.jpg" />
     <Content Include="splashscreen\imgs\earth-from-space.png" />
+    <Content Include="splashscreen\imgs\game-of-ships-green-blend.png" />
+    <Content Include="splashscreen\imgs\gos-blk-100-2.png" />
+    <Content Include="splashscreen\imgs\gos-blk-100.png" />
+    <Content Include="splashscreen\imgs\gos-blu-100-blend.png" />
+    <Content Include="splashscreen\imgs\gos-blu-100.png" />
+    <Content Include="splashscreen\imgs\gos-grn-100-2.png" />
+    <Content Include="splashscreen\imgs\gos-grn-100-3.png" />
+    <Content Include="splashscreen\imgs\gos-grn-100.png" />
     <Content Include="splashscreen\imgs\soundOn.png" />
     <Content Include="splashscreen\imgs\soundOff.png" />
     <Content Include="splashscreen\scripts\animate-button-contents.js" />
