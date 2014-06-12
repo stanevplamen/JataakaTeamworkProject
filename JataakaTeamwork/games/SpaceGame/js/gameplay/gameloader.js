@@ -23,11 +23,12 @@ window.onload = function () {
 
     clock = new THREE.Clock();
 
-    drawShip();
+   
     init();
     animate();
     resetToDisplay();
     dynamicCreateTargetsInit();
+    drawShip();
 };
 
 // global variables
@@ -311,7 +312,7 @@ function init() {
     }
 
     // the enemy ships
-     createEnemyShips();
+    createEnemyShips();
 
 
     projector = new THREE.Projector();
@@ -349,82 +350,123 @@ function init() {
 
 };
 
+var ninetyDegAngle = 90 * (Math.PI / 180);
+var movingShips = {};
+var specialTargets = {};
 function createEnemyShips() {
 
-    ; (function () {
-        // add a ambient light
-        var light = new THREE.AmbientLight(0xff0000)
-        scene.add(light)
-        // add a light in front
-        var light = new THREE.DirectionalLight('white', 1)
-        light.position.set(0.5, 0.5, 2)
-        scene.add(light)
-        // add a light behind
-        var light = new THREE.DirectionalLight('white', 1)
-        light.position.set(-0.5, -0.5, -2)
-        scene.add(light)
-    })()
-
     //////////////////////////////////////////////////////////////////////////////////
-    //		comment								//
+    //		the ships							//
     //////////////////////////////////////////////////////////////////////////////////
+    var geometry = new THREE.CubeGeometry(4000, 400, 200);
 
+    // first ship
+    var ids1_mask = 'ship_z_01_mask';
+    specialTargets[ids1_mask] = true;
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0x101010 }));
 
+    object.position.x = -30000;
+    object.position.y = 0.5;
+    object.position.z = -1800;
+    object.rotation.x = ninetyDegAngle;
+    object.id = ids1_mask;
+    //  indicates that the element is real target
+    visualTargetIds[ids1_mask] = true;
+    targetScreenObjects[ids1_mask] = object;
+
+    movingShips[ids1_mask] = object;
+    scene.add(object);
+
+    var ids1 = 'ship_z_01';
     THREEx.SpaceShips.loadSpaceFighter01(function (object3d) {
-        object3d.position.x = -1
-        object3d.position.y = 0.5
-        scene.add(object3d)
+        object3d.position.x = -30000;
+        object3d.position.y = 0.5;
+        object3d.scale.set(10, 10, 10);
+
+        object3d.id = ids1;
+        movingShips[ids1] = object3d;
+
+        //visualTargetIds[ids1] = true;
+        //targetScreenObjects[ids1] = object3d;
+
+        scene.add(object3d);
     })
 
+    // second ship
+    var ids2_mask = 'ship_z_02_mask';
+    specialTargets[ids2_mask] = true;
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0x000000 }));
+
+    object.position.x = 30000;
+    object.position.y = 0.5;
+    object.id = ids2_mask;
+    object.position.z = -1800;
+    object.rotation.x = ninetyDegAngle;
+    //  indicates that the element is real target
+    visualTargetIds[ids2_mask] = true;
+    targetScreenObjects[ids2_mask] = object;
+
+    movingShips[ids2_mask] = object;
+    scene.add(object);
+
+    var ids2 = 'ship_z_02';
     THREEx.SpaceShips.loadSpaceFighter02(function (object3d) {
-        object3d.position.x = 1
-        object3d.position.y = 0.5
-        scene.add(object3d)
+        object3d.position.x = 30000;
+        object3d.position.y = 0.5;
+        object3d.scale.set(10, 10, 10);
+
+        object3d.id = ids2;
+        movingShips[ids2] = object3d;
+
+        visualTargetIds[ids2] = true;
+        targetScreenObjects[ids2] = object3d;
+
+        scene.add(object3d);
     })
 
-    THREEx.SpaceShips.loadSpaceFighter03(function (object3d) {
-        var spaceship = object3d;
-        spaceship.scale.set(10000, 10000, 10000);
-        scene.add(spaceship)
+    // third ship
+    var ids3_mask = 'ship_z_03_mask';
+    specialTargets[ids3_mask] = true;
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0x101010 }));
 
-        var shoot = new THREEx.SpaceShips.Shoot()
-        shoot.position.x = 0.5
-        shoot.position.z = 0.3
-        scene.add(shoot)
+    object.position.x = 42000;
+    object.position.y = 0.5;
+    object.id = ids3_mask;
+    object.position.z = -1800;
+    object.rotation.x = ninetyDegAngle;
+    //  indicates that the element is real target
+    visualTargetIds[ids3_mask] = true;
+    targetScreenObjects[ids3_mask] = object;
 
-        var shoot = new THREEx.SpaceShips.Shoot()
-        shoot.position.x = -0.5
-        shoot.position.z = 0.3
-        scene.add(shoot)
+    movingShips[ids3_mask] = object;
+    scene.add(object);
 
-        var detonation = new THREEx.SpaceShips.Detonation()
-        detonation.position.x = 0.5
-        detonation.position.z = 0.1
-        scene.add(detonation)
+    var ids3 = 'ship_z_03';
+    THREEx.SpaceShips.loadSpaceFighter01(function (object3d) {
+        object3d.position.x = 42000;
+        object3d.position.y = 0.5;
+        object3d.scale.set(10, 10, 10);
 
-        var detonation = new THREEx.SpaceShips.Detonation()
-        detonation.position.x = -0.5
-        detonation.position.z = 0.1
-        scene.add(detonation)
+        object3d.id = ids3;
+        movingShips[ids3] = object3d;
 
-        var light = new THREE.PointLight()
-        detonation.position.x = -0.5
-        detonation.position.z = 0.1
+        visualTargetIds[ids3] = true;
+        targetScreenObjects[ids3] = object3d;
 
-        scene.add(light)
+        scene.add(object3d);
     })
 
-    THREEx.SpaceShips.loadShuttle01(function (object3d) {
-        object3d.position.x = -1
-        object3d.position.y = -0.5
-        scene.add(object3d)
-    })
+    //THREEx.SpaceShips.loadShuttle01(function (object3d) {
+    //    object3d.position.x = -1
+    //    object3d.position.y = -0.5
+    //    scene.add(object3d)
+    //})
 
-    THREEx.SpaceShips.loadShuttle02(function (object3d) {
-        object3d.position.x = 1
-        object3d.position.y = -0.5
-        scene.add(object3d)
-    })
+    //THREEx.SpaceShips.loadShuttle02(function (object3d) {
+    //    object3d.position.x = 1
+    //    object3d.position.y = -0.5
+    //    scene.add(object3d)
+    //})
 }
 
 function onWindowResize(event) {
@@ -503,6 +545,7 @@ function render() {
     // find intersections between the mouse cursor and the present 3D objects
     checkForShipCollisions();
     checkCameraLimits();
+    moveShips();
 
     var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
     projector.unprojectVector(vector, camera);
@@ -524,6 +567,9 @@ function render() {
                 var current_id = INTERSECTED.id;
                 INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
                 INTERSECTED.material.emissive.setHex(0xff0000);
+                if (specialTargets[current_id]) {
+                    if (INTERSECTED && INTERSECTED.material.emissive) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex)
+                }
             }
         }
 
@@ -652,12 +698,24 @@ function callFire() {
     }
 }
 
+function killShip(current_id) {
+
+    var t = 5;
+    // TODO 
+    // get the ship id -> get the element -> remove the  element
+}
+
 // physycal removement of the kiled object
 function delayKill(current_id) {
 
     scene.remove(objectTokill);
     INTERSECTED = objectTokill = null;
     playSound(explodeSound, 0.45);
+
+    if (specialTargets[current_id]) {      
+        specialTargets[current_id] = false;
+        killShip(current_id);
+    }
 }
 
 var additionX;
@@ -779,6 +837,15 @@ function createDynamicTargets() {
 function dynamicCreateTargetsInit() {
 
     var intervalID = setInterval(function () { createDynamicTargets(); }, 3000);
+}
+
+function moveShips() {
+
+    for (var a in movingShips) {
+
+        var ship = movingShips[a];
+        ship.position.z += 110;
+    }
 }
 
 // drawing of the spaceship cabin
