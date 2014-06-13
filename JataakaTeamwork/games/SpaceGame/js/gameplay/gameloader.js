@@ -23,12 +23,12 @@ window.onload = function () {
 
     clock = new THREE.Clock();
 
-   
+    drawShip();
+    drawResultsContainer();
     init();
     animate();
     resetToDisplay();
     dynamicCreateTargetsInit();
-    drawShip();
 };
 
 // global variables
@@ -358,12 +358,12 @@ function createEnemyShips() {
     //////////////////////////////////////////////////////////////////////////////////
     //		the ships							//
     //////////////////////////////////////////////////////////////////////////////////
-    var geometry = new THREE.CubeGeometry(4000, 400, 200);
+    var geometry = new THREE.CubeGeometry(5000, 600, 400);
 
     // first ship
     var ids1_mask = 'ship_z_01_mask';
     specialTargets[ids1_mask] = true;
-    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0x101010 }));
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
     object.position.x = -30000;
     object.position.y = 0.5;
@@ -395,7 +395,7 @@ function createEnemyShips() {
     // second ship
     var ids2_mask = 'ship_z_02_mask';
     specialTargets[ids2_mask] = true;
-    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0x000000 }));
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
     object.position.x = 30000;
     object.position.y = 0.5;
@@ -427,7 +427,7 @@ function createEnemyShips() {
     // third ship
     var ids3_mask = 'ship_z_03_mask';
     specialTargets[ids3_mask] = true;
-    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0x101010 }));
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
     object.position.x = 42000;
     object.position.y = 0.5;
@@ -669,32 +669,35 @@ var objectTokill = null;
 function callFire() {
 
     // fire torpedo function
+    if (AMMO > 0) {
+        initMissile();
+        AMMO--;
+        writeScore();
 
-    initMissile();
+        if (INTERSECTED && INTERSECTED.id) {
 
-    if (INTERSECTED && INTERSECTED.id) {
+            // kill the object is its on target
+            var current_id = INTERSECTED.id;
+            var isRealTarget = visualTargetIds[current_id];
 
-        // kill the object is its on target
-        var current_id = INTERSECTED.id;
-        var isRealTarget = visualTargetIds[current_id];
+            if (isRealTarget) {
 
-        if (isRealTarget) {
+                playSound(blasterSound, 0.03);
+                visualTargetIds[current_id] = false;
+                objectTokill = INTERSECTED;
 
-            playSound(blasterSound, 0.03);
-            visualTargetIds[current_id] = false;
-            objectTokill = INTERSECTED;
+                INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+                INTERSECTED.material.emissive.setHex(0xffffff);
 
-            INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-            INTERSECTED.material.emissive.setHex(0xffffff);
+                setTimeout(function () {
+                    delayKill(current_id);
+                }, fireDelayIndex);
+            }
 
-            setTimeout(function () {
-                delayKill(current_id);
-            }, fireDelayIndex);
+            //scene.remove(INTERSECTED);
+
+            INTERSECTED = null;
         }
-
-        //scene.remove(INTERSECTED);
-
-        INTERSECTED = null;
     }
 }
 
@@ -711,13 +714,22 @@ function delayKill(current_id) {
     scene.remove(objectTokill);
     INTERSECTED = objectTokill = null;
     playSound(explodeSound, 0.45);
+    POINTS += 10; killed++;
+    writeScore();
+    if (killed % 10 == 0) {
+        AMMO += 20;
+    }
 
     if (specialTargets[current_id]) {      
         specialTargets[current_id] = false;
         killShip(current_id);
+        POINTS += 100;
+        AMMO += 100;
+        writeScore();
     }
 }
 
+var killed = 0;
 var additionX;
 var additionY;
 var additionZ;
@@ -846,6 +858,23 @@ function moveShips() {
         var ship = movingShips[a];
         ship.position.z += 110;
     }
+}
+
+function writeScore() {
+    var resultString = '<strong>Ammo: ' + AMMO + '</strong><br /> <br /><strong>Points: ' + POINTS + '</strong>';
+    resultContainer.innerHTML = resultString;
+}
+
+var AMMO = 100;
+var POINTS = 0;
+var resultContainer;
+function drawResultsContainer() {
+
+    resultContainer = document.createElement('div');
+    resultContainer.id = 'ship-stats';
+    var resultString =   '<strong>Ammo: ' + AMMO + '</strong><br /> <br /><strong>Points: ' + POINTS  +'</strong>';
+    resultContainer.innerHTML = resultString;
+    document.body.appendChild(resultContainer);
 }
 
 // drawing of the spaceship cabin
