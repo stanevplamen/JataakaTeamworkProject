@@ -688,7 +688,7 @@ function callFire() {
             INTERSECTED.material.emissive.setHex(0xffffff);
 
             setTimeout(function () {
-                delayKill();
+                delayKill(current_id);
             }, fireDelayIndex);
         }
 
@@ -700,12 +700,12 @@ function callFire() {
 
 function killShip(current_id) {
 
-    var t = 5;
-    // TODO 
-    // get the ship id -> get the element -> remove the  element
+    var killedShipId = current_id.substring(0, 9);
+    objectTokill = movingShips[killedShipId];
+    scene.remove(objectTokill);   
 }
 
-// physycal removement of the kiled object
+// physycal removement of the  kiled object
 function delayKill(current_id) {
 
     scene.remove(objectTokill);
