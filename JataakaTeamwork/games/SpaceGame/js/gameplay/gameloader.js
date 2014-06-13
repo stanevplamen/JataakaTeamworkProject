@@ -363,7 +363,7 @@ function createEnemyShips() {
     // first ship
     var ids1_mask = 'ship_z_01_mask';
     specialTargets[ids1_mask] = true;
-    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: 0x000000 }));
 
     object.position.x = -30000;
     object.position.y = 0.5;
@@ -395,7 +395,7 @@ function createEnemyShips() {
     // second ship
     var ids2_mask = 'ship_z_02_mask';
     specialTargets[ids2_mask] = true;
-    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: 0x000000 }));
 
     object.position.x = 30000;
     object.position.y = 0.5;
@@ -427,7 +427,7 @@ function createEnemyShips() {
     // third ship
     var ids3_mask = 'ship_z_03_mask';
     specialTargets[ids3_mask] = true;
-    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: 0x000000 }));
 
     object.position.x = 42000;
     object.position.y = 0.5;
@@ -512,8 +512,11 @@ function checkForShipCollisions() {
                 var ax = Math.abs(cx - ix);
                 var ay = Math.abs(cy - iy);
                 if (ax < 80 && ay < 80) {
-                    alert('boom');
-                    playSound(explodeSound, 0.45);
+                    //alert('boom');
+                    ARMOR -= 10;
+                    playSound(explodeSound, 0.75);
+                    if (ARMOR <= 0) { alert('game over'); }
+                    writeScore();
                 }
             }
         }
@@ -682,7 +685,7 @@ function callFire() {
 
             if (isRealTarget) {
 
-                playSound(blasterSound, 0.03);
+                playSound(blasterSound, 0.60);
                 visualTargetIds[current_id] = false;
                 objectTokill = INTERSECTED;
 
@@ -751,15 +754,19 @@ function initMissile() {
         additionY = moveY - posY;
         additionZ = moveZ - posZ;
 
-        var geometry = new THREE.CubeGeometry(80, 80, 80);
+        var geometry = new THREE.CubeGeometry(120, 120, 2000);
 
         for (var i = 0; i < 2; i++) {
 
-            var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+            var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: 0xffffff }));
 
             object.position.x = posX;
             object.position.y = posY;
             object.position.z = posZ;
+            object.rotation.x = camera.rotation.x;
+            object.rotation.y = camera.rotation.y;
+            object.rotation.z = camera.rotation.z;
+
             missilesObjects.push(object);
 
             scene.add(object);
@@ -861,18 +868,19 @@ function moveShips() {
 }
 
 function writeScore() {
-    var resultString = '<strong>Ammo: ' + AMMO + '</strong><br /> <br /><strong>Points: ' + POINTS + '</strong>';
+    var resultString = '<strong>Armor: ' + ARMOR + '</strong><br /><strong>Ammo: ' + AMMO + '</strong><br /><strong>Points: ' + POINTS + '</strong>';
     resultContainer.innerHTML = resultString;
 }
 
 var AMMO = 100;
 var POINTS = 0;
+var ARMOR = 100;
 var resultContainer;
 function drawResultsContainer() {
 
     resultContainer = document.createElement('div');
     resultContainer.id = 'ship-stats';
-    var resultString =   '<strong>Ammo: ' + AMMO + '</strong><br /> <br /><strong>Points: ' + POINTS  +'</strong>';
+    var resultString = '<strong>Armor: ' + ARMOR + '</strong><br /><strong>Ammo: ' + AMMO + '</strong><br /><strong>Points: ' + POINTS + '</strong>';
     resultContainer.innerHTML = resultString;
     document.body.appendChild(resultContainer);
 }

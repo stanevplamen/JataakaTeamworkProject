@@ -32,7 +32,7 @@ function playSound (id, vol) {
 	if (!soundOn || Audio == undefined) {
 		return;
 	}
-	var volume = 3;
+	var volume = 0.7;
 	if (vol != undefined) {
 		volume = vol;
 	}
