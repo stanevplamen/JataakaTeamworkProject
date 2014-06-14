@@ -1,6 +1,6 @@
 ﻿(function myfunction() {
 
-    var displayIntro = false;
+    var displayIntro = true;
 
     var presents = $('#presents');
     var title = presents.next();
