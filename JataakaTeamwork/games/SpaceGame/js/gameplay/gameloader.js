@@ -54,6 +54,8 @@ var geometry, meshPlanet, meshClouds, meshMoon, meshVenus;
 var dirLight, pointLight, ambientLight;
 var d, dPlanet, dMoon, dMoonVec, dVenus, dVenusVec;
 var clock;
+var shipArmor = 100;
+var shipAmmo = 200;
 
 // this is a container for the current game targets 
 // searching by target_id -> (to get) the target (by its id)
@@ -101,7 +103,7 @@ function init() {
 
     /// visual objects and effects
     dirLight = new THREE.DirectionalLight(0xffffff);
-    dirLight.position.set( -1, 0, 1).normalize();
+    dirLight.position.set(-1, 0, 1).normalize();
     scene.add(dirLight);
 
     ambientLight = new THREE.AmbientLight(0x000000);
@@ -179,7 +181,7 @@ function init() {
     for (var i = 0; i < 2; i++) {
 
         var meshMoonNew = new THREE.Mesh(geometry, materialMoon);
-        meshMoonNew.position.set( -radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, -Math.random() * 66000);
+        meshMoonNew.position.set(-radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, -Math.random() * 66000);
         meshMoonNew.scale.set(moonScale, moonScale, moonScale);
         scene.add(meshMoonNew);
     }
@@ -196,7 +198,7 @@ function init() {
     for (i = 0; i < 2; i++) {
 
         var meshVenusNew = new THREE.Mesh(geometry, materialVenus);
-        meshVenusNew.position.set( -radius * Math.random() * Math.random() * i * 33, Math.random() * 30000, Math.random() * 50000);
+        meshVenusNew.position.set(-radius * Math.random() * Math.random() * i * 33, Math.random() * 30000, Math.random() * 50000);
         meshVenusNew.scale.set(venusScale, venusScale, venusScale);
         scene.add(meshVenusNew);
     }
@@ -314,7 +316,7 @@ function init() {
     }
 
     // the enemy ships
-     createEnemyShips();
+    createEnemyShips();
 
     projector = new THREE.Projector();
     raycaster = new THREE.Raycaster();
@@ -363,7 +365,7 @@ function createEnemyShips() {
         scene.add(light);
         // add a light behind
         light = new THREE.DirectionalLight('white', 1);
-        light.position.set( -0.5, -0.5, -2);
+        light.position.set(-0.5, -0.5, -2);
         scene.add(light);
     })();
 
@@ -470,7 +472,8 @@ function checkForShipCollisions() {
                 var ax = Math.abs(cx - ix);
                 var ay = Math.abs(cy - iy);
                 if (ax < 80 && ay < 80) {
-                    pauseWhenDead();
+                    shipArmor -= 10;
+                    displayStats();
                     playSound(explodeSound, 0.45);
                 }
             }
@@ -501,6 +504,7 @@ function checkCameraLimits() {
 function render() {
 
     // find intersections between the mouse cursor and the present 3D objects
+    checkForShipNearEarth();
     checkForShipCollisions();
     checkCameraLimits();
 
@@ -627,7 +631,8 @@ var objectTokill = null;
 function callFire() {
 
     // fire torpedo function
-
+    shipAmmo -= 1;
+    displayStats();
     initMissile();
 
     if (INTERSECTED && INTERSECTED.id) {
@@ -697,6 +702,7 @@ function initMissile() {
             missilesObjects.push(object);
 
             scene.add(object);
+
         }
 
         setTimeout(function () {
@@ -791,5 +797,47 @@ function drawShip() {
     var ctx = canvas.getContext('2d');
     var ship = document.getElementById('cabin');
     ctx.drawImage(ship, 0, 0, canvas.width, canvas.height);
+    displayStats();
+}
+
+function displayStats() {
+    var shipAmmoStats = document.getElementById('ammo-stats');
+    var shipArmorStats = document.getElementById('armor-stats');
+    shipAmmoStats.innerHTML = 'Ammo: ' + shipAmmo;
+    shipArmorStats.innerHTML = 'Armor: ' + shipArmor;
+}
+
+function checkForShipNearEarth() {
+
+    var cx = camera.position.x;
+    var cy = camera.position.y;
+    var cz = camera.position.z;
+
+    if (cx !== 0 && cy !== 0 && cz !== 0) {
+
+        if (meshPlanet.position) {
+
+            var ix = meshPlanet.position.x;
+            var iy = meshPlanet.position.y;
+            var iz = meshPlanet.position.z;
+
+            var ax = Math.abs(cx - ix);
+            var ay = Math.abs(cy - iy);
+            var az= Math.abs(cz-iz);
+            if (ax < 8000 && ay < 8000 && az<8000) {
+                if (shipAmmo<200) {
+                    shipAmmo += 1;
+                    displayStats();
+                    playSound(explodeSound, 0.10);
+                }
+                if (shipArmor<100) {
+                    shipArmor += 1;
+                    displayStats();
+                    playSound(explodeSound, 0.10);
+                }
+            }
+        }
+    }
+
 }
 //}());

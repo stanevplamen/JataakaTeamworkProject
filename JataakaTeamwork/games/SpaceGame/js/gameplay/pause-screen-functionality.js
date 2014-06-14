@@ -79,7 +79,7 @@ function resumeGame() {
 function exitGame() {
     // maybe messages and stuff here?
     if (confirm('Are you sure you wish to exit the game?')) {
-        window.close();
+        window.exitGame();
     }
 }
 
