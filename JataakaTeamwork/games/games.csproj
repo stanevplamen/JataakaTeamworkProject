@@ -71,6 +71,7 @@
     <Content Include="SpaceGame\js\gameplay\models\SpaceFighter02\F02_512.jpg" />
     <Content Include="SpaceGame\js\gameplay\models\SpaceFighter02\SpaceFighter02.js" />
     <Content Include="SpaceGame\js\gameplay\models\SpaceFighter03\F03_512.jpg" />
+    <Content Include="SpaceGame\js\gameplay\pause-screen-functionality.js" />
     <Content Include="SpaceGame\js\gameplay\Ships\MTLLoader.js" />
     <Content Include="SpaceGame\js\gameplay\Ships\OBJLoader.js" />
     <Content Include="SpaceGame\js\gameplay\Ships\OBJMTLLoader.js" />
