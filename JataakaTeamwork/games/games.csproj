@@ -90,6 +90,16 @@
     <Content Include="SpaceGame\js\system\postprocessing\ShaderPass.js" />
     <Content Include="SpaceGame\js\system\shaders\CopyShader.js" />
     <Content Include="SpaceGame\js\system\shaders\FilmShader.js" />
+    <Content Include="SpaceGame\snd\explosion sounds\explo3.wav" />
+    <Content Include="SpaceGame\snd\explosion sounds\explo4.wav" />
+    <Content Include="SpaceGame\snd\explosion sounds\explo5.wav" />
+    <Content Include="SpaceGame\snd\explosion sounds\EXPLOLRG.WAV" />
+    <Content Include="SpaceGame\snd\explosion sounds\target-explosion01.wav" />
+    <Content Include="SpaceGame\snd\explosion sounds\target-explosion02.wav" />
+    <Content Include="SpaceGame\snd\explosion sounds\target-explosion03.WAV" />
+    <Content Include="SpaceGame\snd\explosion sounds\target-explosion04.WAV" />
+    <Content Include="SpaceGame\snd\game over sounds\YouLose.wav" />
+    <Content Include="SpaceGame\snd\game over sounds\YouWin.wav" />
     <Content Include="SpaceGame\textures\planets\cabin.png" />
     <Content Include="SpaceGame\textures\planets\cockpit.png" />
     <Content Include="SpaceGame\textures\planets\death_star.png" />
@@ -119,6 +129,9 @@
     <Content Include="splashscreen\scripts\animate-button-contents.js" />
     <Content Include="splashscreen\scripts\global-functions.js" />
     <Content Include="splashscreen\scripts\menu-no-intro.js" />
+    <Content Include="splashscreen\sounds\menu-button-hover.WAV" />
+    <Content Include="splashscreen\sounds\menu-item-close1.wav" />
+    <Content Include="splashscreen\sounds\menu-item-open1.wav" />
     <Content Include="splashscreen\sounds\menu-sound.mp3" />
     <Content Include="splashscreen\sounds\menu-sound.wav" />
     <Content Include="splashscreen\main-menu.html" />
