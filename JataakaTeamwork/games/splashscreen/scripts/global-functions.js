@@ -1,6 +1,12 @@
 ﻿var win = $(window);
+var muteButt;
 var controlsTable = $('table');
 var authorsTable = $('div#authors-wrapper');
+var controlsWrapper = $('#controls-wrapper');
+var menuSound = new Audio('sounds/menu-sound.wav');
+menuSound.loop = true;
+var soundOnSrc = 'imgs/soundOn.png';
+var soundOffSrc = 'imgs/soundOff.png';
 
 function centerControlsTable() {
     var winWidth = win.width();
@@ -22,4 +28,24 @@ function centerAuthorsTable() {
         top: tableTop,
         left: tableLeft
     });
+}
+
+function createMuteButton() {
+    if (muteButt !== undefined) {
+        return;
+    }
+    muteButt = $('<img id="soundToggle" src="imgs/soundOff.png" />');
+    muteButt.on('click', toggleMute);
+    controlsWrapper.append(muteButt);
+}
+
+function toggleMute() {
+    menuSound.muted = !menuSound.muted;
+    var currSrc = muteButt.attr('src');
+
+    if (currSrc === soundOnSrc) {
+        muteButt.attr('src', 'imgs/soundOff.png');
+    } else {
+        muteButt.attr('src', 'imgs/soundOn.png');
+    }
 }
