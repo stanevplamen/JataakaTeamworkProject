@@ -8,7 +8,7 @@ function centerControlsTable() {
     var tableTop = (winHeight - parseFloat(controlsTable.height())) / 2;
     var tableLeft = (winWidth - parseFloat(controlsTable.outerWidth())) / 2;
     controlsTable.css({
-        top: tableTop - 100,
+        top: tableTop,
         left: tableLeft
     });
 }

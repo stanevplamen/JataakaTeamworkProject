@@ -4,7 +4,6 @@
     var presents = $('#presents');
     var title = presents.next();
     var small = title.next();
-    //var win = $(window);
     var menuWrapper = $('#menu-wrapper');
     var controlsWrapper = $('#controls-wrapper');
     var menuSound = new Audio('sounds/menu-sound.wav');
@@ -12,17 +11,14 @@
     var muteButt;
     var soundOnSrc = 'imgs/soundOn.png';
     var soundOffSrc = 'imgs/soundOff.png';
-    //var controlsTable = $('table');
 
     // comment this out, uncoment whats below
     //menuWrapper.fadeIn(500);
     //centerMenuWrapper();
     //centerControlsTable();
     //sizeBodyTo100Percent();
-    //win.resize(centerMenuWrapper);
     //win.resize(centerControlsTable);
     //win.resize(centerAuthorsTable);
-    //win.resize(sizeBodyTo100Percent);
 
     presents.css('display', 'block').hide();
     title.css('display', 'block').hide();
@@ -53,26 +49,12 @@
 
             win.resize(centerControlsTable);
             win.resize(centerAuthorsTable);
-            win.resize(sizeBodyTo100Percent);
 
             title.fadeOut(2000);
             setTimeout(initializeMenu, 1000);
             createMuteButton();
         });
     }, 9500) // 9500
-
-    function centerMenuWrapper() {
-        //var winWidth = win.width();
-        //var winHeight = win.height();
-        //var ratio = 1; // 0.979;
-        //menuWrapper.height(winHeight * ratio);
-        //menuWrapper.width(winWidth * ratio);
-    }
-
-    function sizeBodyTo100Percent() {
-        body.height(win.outerHeight());
-        body.width(win.outerWidth());
-    }
 
     function initializeMenu() {
         centerMenuWrapper();

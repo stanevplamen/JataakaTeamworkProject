@@ -15,12 +15,12 @@ body {
   color: #ffffff;
   font-family: 'Times New Roman', Times, serif;
   cursor: context-menu;
-  height: 100%;
-  width: 100%;
+  height: inherit;
+  width: inherit;
 }
 body #start-screen-wrapper {
   position: absolute;
-  width: 1330px;
+  width: 1000px;
 }
 body #start-screen-wrapper img {
   margin: 0 auto;
@@ -89,12 +89,14 @@ body #menu-wrapper #controls-wrapper #soundToggle {
   width: 25px;
   height: 25px;
   float: right;
-  margin-top: 15px;
+  margin-top: -27px;
+  margin-right: -12px;
 }
 body #menu-wrapper #controls-wrapper ul {
   list-style-type: none;
   display: inline-block;
   margin-top: 15px;
+  margin-left: 22px;
 }
 body #menu-wrapper #controls-wrapper ul li {
   display: inline-block;
@@ -112,9 +114,9 @@ body #menu-wrapper #controls-wrapper ul li:hover > .menu-button {
   color: #0ff;
 }
 body #menu-wrapper .li-item-content {
-  display: none;
   background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
+  display: none;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100%;
@@ -166,7 +168,8 @@ body #menu-wrapper .li-item-content #authors-wrapper img {
 }
 body #menu-wrapper .li-item-content #authors-wrapper .col {
   display: inline-block;
-  margin: auto;
+  margin: 0 auto;
+  margin-top: 10px;
 }
 body #menu-wrapper .li-item-content #authors-wrapper .col:first-of-type {
   float: left;
