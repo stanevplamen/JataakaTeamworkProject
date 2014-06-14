@@ -3,6 +3,11 @@
     var dimmer = $('#dimmer');
     var allContentItems = $('div.li-item-content');
 
+    $('#play-button').off('click').on('click', function () {
+        window.open('../SpaceGame/index.html');
+        window.close();
+    });
+
     allMenuButtons.click(function () {
         $this = $(this);
         var dataID = $this.attr('data-id');
@@ -20,7 +25,7 @@
             menuSlideOpenSound.play();
         }
 
-        contentToDisplay.toggle(1000);
+        contentToDisplay.toggle(500);
 
         if ($this.attr('data-cntrls')) {
             centerControlsTable();
