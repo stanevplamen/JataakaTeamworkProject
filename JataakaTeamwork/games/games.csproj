@@ -118,8 +118,10 @@
     <Content Include="splashscreen\imgs\soundOff.png" />
     <Content Include="splashscreen\scripts\animate-button-contents.js" />
     <Content Include="splashscreen\scripts\global-functions.js" />
+    <Content Include="splashscreen\scripts\menu-no-intro.js" />
     <Content Include="splashscreen\sounds\menu-sound.mp3" />
     <Content Include="splashscreen\sounds\menu-sound.wav" />
+    <Content Include="splashscreen\main-menu.html" />
     <Content Include="splashscreen\styles\style.less" />
     <Content Include="SpaceGame\snd\blaster.ogg" />
     <Content Include="SpaceGame\snd\explode.ogg" />

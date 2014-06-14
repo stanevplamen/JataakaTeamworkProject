@@ -1,6 +1,5 @@
 ﻿body {
-    /*background: #000;*/
-    background-color: #fff;
+    background: #000;
     color: #eee;
     padding: 0;
     margin: 0;
@@ -41,11 +40,11 @@
 
     #pause-screen div {
         background-color: rgba(0, 0, 0, 0.5);
-        border: 3px outset #2d36d1;
-        border-radius: 8px;
+        border-radius: 4px;
     }
 
     #pause-screen #title {
+        border: 3px outset #aaa;
         margin: 10px auto;
         margin-top: 50px;
         width: 40%;
@@ -53,6 +52,7 @@
     }
 
     #pause-screen #content {
+        border: 2px ridge #aaa;
         margin: 5px auto;
         width: 60%;
         height: 60%;
@@ -80,6 +80,10 @@
 
         #pause-screen .menu-button:first-of-type {
             margin-bottom: 10px;
+        }
+
+        #pause-screen .menu-button:last-of-type {
+            margin-top: 10px;
         }
 
         #pause-screen .menu-button:hover {
