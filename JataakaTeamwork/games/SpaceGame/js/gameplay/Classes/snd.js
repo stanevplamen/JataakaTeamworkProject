@@ -60,10 +60,10 @@ function randomBlasterSound() {
 if (Audio != undefined) {
 	// sounds
 
-	if(randomBlasterSound() === url){
-		var blasterSound = new Audio(randomBlasterSound());	
-	}
-
+	//if(true){
+	//	var blasterSound = new Audio(randomBlasterSound());	
+	//}
+    var blasterSound = new Audio("snd/blaster.ogg");
 	var explodeSound = new Audio("snd/explode.ogg");
 
 	var worldMusic = new Audio("snd/music.ogg");
