@@ -50,32 +50,10 @@ var gameIsPaused = false;
         });
     }
 
-    function pauseWhenDead() {
-        var pauseScreen = $('#death-screen');
-        var psContent = pauseScreen.find('#content');
-        var btnWrapper = psContent.find('.button-wrapper');
-        var mainMenuButt = $('#main-menu');
-
-        pauseGame();
-        centerPauseScreenButtons();
-
-        function centerPauseScreenButtons() {
-            var cntWidth = psContent.outerWidth();
-            var cntHeight = psContent.outerHeight();
-            var wrpHeight = btnWrapper.outerHeight();
-            var wrpWidth = btnWrapper.outerWidth();
-
-            btnWrapper.css({
-                left: (cntWidth - wrpWidth) / 2,
-                top: (cntHeight - wrpHeight) / 2 - 25,
-            });
-        }
-    }
-
     function pauseGame() {
         gameIsPaused = true;
         menuSlideOpenSound.play();
-        window.cancelAnimationFrame(requestId);
+        window.cancelAnimationFrame(requestedId);
     }
 
     function resumeGame() {
@@ -95,4 +73,26 @@ var gameIsPaused = false;
     function returnToMainMenu() {
         document.location = '../splashscreen/main-menu.html';
     }
+
+    //function pauseWhenDead() {
+    //    var pauseScreen = $('#death-screen');
+    //    var psContent = pauseScreen.find('#content');
+    //    var btnWrapper = psContent.find('.button-wrapper');
+    //    var mainMenuButt = $('#main-menu');
+
+    //    pauseGame();
+    //    centerPauseScreenButtons();
+
+    //    function centerPauseScreenButtons() {
+    //        var cntWidth = psContent.outerWidth();
+    //        var cntHeight = psContent.outerHeight();
+    //        var wrpHeight = btnWrapper.outerHeight();
+    //        var wrpWidth = btnWrapper.outerWidth();
+
+    //        btnWrapper.css({
+    //            left: (cntWidth - wrpWidth) / 2,
+    //            top: (cntHeight - wrpHeight) / 2 - 25,
+    //        });
+    //    }
+    //}
 })();
