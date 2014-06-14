@@ -129,9 +129,9 @@
     <Content Include="splashscreen\scripts\animate-button-contents.js" />
     <Content Include="splashscreen\scripts\global-functions.js" />
     <Content Include="splashscreen\scripts\menu-no-intro.js" />
-    <Content Include="splashscreen\sounds\menu-button-hover.WAV" />
-    <Content Include="splashscreen\sounds\menu-item-close1.wav" />
-    <Content Include="splashscreen\sounds\menu-item-open1.wav" />
+    <Content Include="splashscreen\sounds\menu-button-hover.wav" />
+    <Content Include="splashscreen\sounds\menu-item-open.wav" />
+    <Content Include="splashscreen\sounds\menu-item-close.wav" />
     <Content Include="splashscreen\sounds\menu-sound.mp3" />
     <Content Include="splashscreen\sounds\menu-sound.wav" />
     <Content Include="splashscreen\main-menu.html" />

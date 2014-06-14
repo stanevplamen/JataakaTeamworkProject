@@ -10,8 +10,8 @@ var gameIsPaused = false;
     var mainMenuButt = $('#pause-screen .main-menu');
     var allPauseScreenButtons = $('#pause-screen .menu-button');
     var menuButtonHoverSound = new Audio('../splashscreen/sounds/menu-button-hover.wav');
-    var menuSlideOpenSound = new Audio('../splashscreen/sounds/menu-item-open1.wav');
-    var menuSlideCloseSound = new Audio('../splashscreen/sounds/menu-item-close1.wav');
+    var menuSlideOpenSound = new Audio('../splashscreen/sounds/menu-item-open.wav');
+    var menuSlideCloseSound = new Audio('../splashscreen/sounds/menu-item-close.wav');
 
     document.addEventListener('keydown', togglePause);
     $(window).on('resize', centerPauseScreenButtons);
