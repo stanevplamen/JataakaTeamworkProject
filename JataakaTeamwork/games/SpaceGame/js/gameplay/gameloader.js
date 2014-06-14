@@ -470,7 +470,7 @@ function checkForShipCollisions() {
                 var ax = Math.abs(cx - ix);
                 var ay = Math.abs(cy - iy);
                 if (ax < 80 && ay < 80) {
-                    alert('boom');
+                    pauseWhenDead();
                     playSound(explodeSound, 0.45);
                 }
             }
@@ -513,7 +513,7 @@ function render() {
 
     if (intersects.length > 0) {
 
-        if (INTERSECTED != intersects[0].object) {
+        if (INTERSECTED !== intersects[0].object) {
 
             if (INTERSECTED && INTERSECTED.material.emissive) {
                 INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);

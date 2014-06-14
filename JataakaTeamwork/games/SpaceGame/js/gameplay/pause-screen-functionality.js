@@ -29,29 +29,6 @@
         }
     }
 
-    function pauseGame() {
-        gameIsPaused = true;
-        window.cancelAnimationFrame(requestId);
-    }
-
-    function resumeGame() {
-        pauseScreen.fadeOut(200);
-        gameIsPaused = false;
-        window.animate();
-    }
-
-    function exitGame() {
-        // maybe messages and stuff here?
-        if (confirm('Are you sure you wish to exit the game?')) {
-            window.close();
-        }
-    }
-
-    function returnToMainMenu() {
-        document.location = '../splashscreen/main-menu.html';
-        //var newWin = document.open('../splashscreen/splashscreen-nointro.html');
-    }
-
     function centerPauseScreenButtons() {
         var cntWidth = psContent.outerWidth();
         var cntHeight = psContent.outerHeight();
@@ -64,3 +41,49 @@
         });
     }
 })();
+
+function pauseWhenDead() {
+    var pauseScreen = $('#death-screen');
+    var psContent = pauseScreen.find('#content');
+    var btnWrapper = psContent.find('.button-wrapper');
+    var mainMenuButt = $('#main-menu');
+
+    pauseGame();
+    centerPauseScreenButtons();
+    mainMenuButt.on('click', returnToMainMenu());
+
+    function centerPauseScreenButtons() {
+        var cntWidth = psContent.outerWidth();
+        var cntHeight = psContent.outerHeight();
+        var wrpHeight = btnWrapper.outerHeight();
+        var wrpWidth = btnWrapper.outerWidth();
+
+        btnWrapper.css({
+            left: (cntWidth - wrpWidth) / 2,
+            top: (cntHeight - wrpHeight) / 2 - 25,
+        });
+    }
+}
+
+function pauseGame() {
+    gameIsPaused = true;
+    window.cancelAnimationFrame(requestId);
+}
+
+function resumeGame() {
+    pauseScreen.fadeOut(200);
+    gameIsPaused = false;
+    window.animate();
+}
+
+function exitGame() {
+    // maybe messages and stuff here?
+    if (confirm('Are you sure you wish to exit the game?')) {
+        window.close();
+    }
+}
+
+function returnToMainMenu() {
+    document.location = '../splashscreen/main-menu.html';
+    //var newWin = document.open('../splashscreen/splashscreen-nointro.html');
+}
