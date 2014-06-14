@@ -54,7 +54,7 @@ var geometry, meshPlanet, meshClouds, meshMoon, meshVenus;
 var dirLight, pointLight, ambientLight;
 var d, dPlanet, dMoon, dMoonVec, dVenus, dVenusVec;
 var clock;
-var shipArmor = 100;
+var shipArmor = 10;
 var shipAmmo = 200;
 
 // this is a container for the current game targets 
@@ -472,9 +472,12 @@ function checkForShipCollisions() {
                 var ax = Math.abs(cx - ix);
                 var ay = Math.abs(cy - iy);
                 if (ax < 80 && ay < 80) {
+                    playSound(explodeSound, 0.45);
                     shipArmor -= 10;
                     displayStats();
-                    playSound(explodeSound, 0.45);
+                    if (shipArmor<=0) {
+                        pauseWhenDead();
+                    }
                 }
             }
         }

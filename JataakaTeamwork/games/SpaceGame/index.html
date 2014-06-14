@@ -29,38 +29,35 @@
 
 </head>
 <body>
-    <div id="info">
-        <b>WASD</b> move, <b>R|F</b> up | down, <b>Q|E</b> roll, <b>up|down</b> pitch, <b>left|right</b> yaw, <b>spacebar</b> fire<br />
-    </div>
     <div id="ship-stats">
-        <strong id="ammo-stats">Ammo: </strong>
+        <strong id="ammo-stats"></strong>
         <br />
         <br />
-        <strong id="armor-stats">Armor: </strong>
+        <strong id="armor-stats"></strong>
     </div>
     <img id="cabin" src="textures/planets/cockpit.png" alt="Death Star picture" />
     <canvas id="the-canvas"></canvas>
 
     <div id="pause-screen">
-        <div id="title">
+        <div class="title">
             <h1>Game Paused</h1>
         </div>
-        <div id="content">
+        <div class="content">
             <section class="button-wrapper">
                 <span id="resume-game-butt" class="menu-button">Resume Game</span>
-                <span id="main-menu" class="menu-button">Exit to Main Menu</span>
+                <span class="main-menu menu-button">Exit to Main Menu</span>
                 <span id="exit-game-butt" class="menu-button">Exit Game</span>
             </section>
         </div>
     </div>
 
     <div id="death-screen">
-        <div id="title">
+        <div class="title">
             <h1>You have died!</h1>
         </div>
-        <div id="content">
+        <div class="content">
             <section class="button-wrapper">
-                <span id="main-menu" class="menu-button">Exit to Main Menu</span>
+                <span class="main-menu menu-button">Exit to Main Menu</span>
             </section>
         </div>
     </div>
