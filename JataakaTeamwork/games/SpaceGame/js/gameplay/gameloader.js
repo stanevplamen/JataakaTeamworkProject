@@ -1,9 +1,9 @@
 ﻿//(function () {
 
+var requestedId;
 // initializing the main structures and objects when the document is loaded
 window.onload = function () {
 
-    var requestedId;
 
     if (!Detector.webgl) Detector.addGetWebGLMessage();
 
