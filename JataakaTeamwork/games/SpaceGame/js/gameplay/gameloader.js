@@ -875,15 +875,17 @@ function createDynamicShips() {
     // first ship
     var ids1_mask;
 
+    var gx = 100 * newShipCounter * getRandomInt(10, 50);
+    var gy = 100 * newShipCounter * getRandomInt(5, 10);
+
     if (newShipCounter <= 9) { ids1_mask = 'ship_z_0' + newShipCounter + '_mask'; }
     else { ids1_mask = 'ship_z_' + newShipCounter + '_mask'; }
 
-    var ids1_mask = 'ship_z_0' + newShipCounter + '_mask';
     specialTargets[ids1_mask] = true;
     var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: 0x000000 }));
 
-    object.position.x = 1000 * newShipCounter;
-    object.position.y = 100 * newShipCounter;
+    object.position.x = gx;
+    object.position.y = gy;
     object.position.z = -1800;
     object.rotation.x = ninetyDegAngle;
     object.id = ids1_mask;
@@ -898,9 +900,10 @@ function createDynamicShips() {
     if (newShipCounter <= 9) { ids1 = 'ship_z_0' + newShipCounter; }
     else { ids1 = 'ship_z_' + newShipCounter; }
 
+
     THREEx.SpaceShips.loadSpaceFighter01(function (object3d) {
-        object3d.position.x = 1000 * newShipCounter;
-        object3d.position.y = 100 * newShipCounter;
+        object3d.position.x = gx;
+        object3d.position.y = gy;
         object3d.scale.set(10, 10, 10);
 
         object3d.id = ids1;
@@ -913,6 +916,10 @@ function createDynamicShips() {
     });
 
     newShipCounter++;
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function dynamicCreateTargetsInit() {
