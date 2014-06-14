@@ -6,9 +6,20 @@
     allMenuButtons.click(function () {
         $this = $(this);
         var dataID = $this.attr('data-id');
-
         var contentToDisplay = $('div[data-id=' + dataID + ']');
+
+        var visibleElements = allContentItems.filter(selectVisibleElements);
+
+        if (visibleElements.length !== 0) {
+            menuSlideCloseSound.play();
+        }
+
         allContentItems.not(contentToDisplay).slideUp(500);
+
+        if (contentToDisplay.is(':visible') == false) {
+            menuSlideOpenSound.play();
+        }
+
         contentToDisplay.toggle(1000);
 
         if ($this.attr('data-cntrls')) {
@@ -17,4 +28,16 @@
             centerAuthorsTable();
         }
     });
+
+    allMenuButtons.mouseenter(function () {
+        menuButtonHoverSound.currentTime = 0;
+        menuButtonHoverSound.play();
+    });
+
+    function selectVisibleElements() {
+        var currElem = $(this);
+        if (currElem.css('display') !== 'none') {
+            return currElem;
+        }
+    }
 })()
