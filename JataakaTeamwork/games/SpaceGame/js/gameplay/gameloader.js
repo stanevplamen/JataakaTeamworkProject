@@ -1,4 +1,4 @@
-﻿//(function () {
+//(function () {
 
 var requestedId;
 // initializing the main structures and objects when the document is loaded
@@ -685,6 +685,7 @@ function callFire() {
         initMissile();
         AMMO--;
         writeScore();
+        blasterSound = new Audio(randomBlasterSound());
 
         if (INTERSECTED && INTERSECTED.id) {
 

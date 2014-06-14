@@ -60,6 +60,7 @@ function randomBlasterSound() {
 if (Audio != undefined) {
 	// sounds
 	var blasterSound = new Audio(randomBlasterSound());
+
 	var explodeSound = new Audio("snd/explode.ogg");
 
 	var worldMusic = new Audio("snd/music.ogg");
