@@ -50,9 +50,16 @@ function playSound (id, vol) {
 	}
 }
 
+function randomBlasterSound() {
+	var i = Math.floor(Math.random() * 4) + 1;
+	var path = 'snd/explosion sounds/';
+	var url = path + 'target-explosion0' + i + '.wav';
+	return url;
+}
+
 if (Audio != undefined) {
 	// sounds
-	var blasterSound = new Audio("snd/blaster.ogg");
+	var blasterSound = new Audio(randomBlasterSound());
 	var explodeSound = new Audio("snd/explode.ogg");
 
 	var worldMusic = new Audio("snd/music.ogg");
