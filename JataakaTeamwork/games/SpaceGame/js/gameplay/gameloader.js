@@ -49,6 +49,7 @@ var SCREEN_WIDTH;
 
 var container, stats;
 var camera, controls, scene, sceneCube, renderer;
+var requestId;
 var geometry, meshPlanet, meshClouds, meshMoon, meshVenus;
 var dirLight, pointLight, ambientLight;
 var d, dPlanet, dMoon, dMoonVec, dVenus, dVenusVec;
@@ -443,11 +444,10 @@ function onWindowResize(event) {
 
 function animate() {
 
-    requestAnimationFrame(animate);
+    requestId = window.requestAnimationFrame(animate);
 
     render();
     stats.update();
-
 }
 
 function checkForShipCollisions() {

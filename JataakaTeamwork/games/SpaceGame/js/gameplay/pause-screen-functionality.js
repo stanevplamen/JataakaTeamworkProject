@@ -15,7 +15,7 @@
     mainMenuButt.on('click', returnToMainMenu);
 
     function togglePause(e) {
-        if (e.keyCode != 27) {
+        if (e.keyCode !== 27) {
             return;
         }
 
@@ -31,11 +31,13 @@
 
     function pauseGame() {
         gameIsPaused = true;
+        window.cancelAnimationFrame(requestId);
     }
 
     function resumeGame() {
         pauseScreen.fadeOut(200);
         gameIsPaused = false;
+        window.animate();
     }
 
     function exitGame() {
@@ -61,4 +63,4 @@
             top: (cntHeight - wrpHeight) / 2 - 25,
         });
     }
-})()
+})();
