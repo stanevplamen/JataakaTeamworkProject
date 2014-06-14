@@ -1,5 +1,6 @@
 ﻿(function myfunction() {
 
+    var body = $('body');
     var presents = $('#presents');
     var title = presents.next();
     var small = title.next();
@@ -14,49 +15,57 @@
     //var controlsTable = $('table');
 
     // comment this out, uncoment whats below
-    //menuWrapper.fadeIn(500);
-    //centerMenuWrapper();
-    //centerControlsTable();
-    //win.resize(centerMenuWrapper);
-    //win.resize(centerControlsTable);
+    menuWrapper.fadeIn(500);
+    centerMenuWrapper();
+    centerControlsTable();
+    sizeBodyTo100Percent();
+    win.resize(centerMenuWrapper);
+    win.resize(centerControlsTable);
+    win.resize(centerAuthorsTable);
+    win.resize(sizeBodyTo100Percent);
 
-    presents.css('display', 'block').hide();
-    title.css('display', 'block').hide();
-    small.css('display', 'block').hide();
+    //presents.css('display', 'block').hide();
+    //title.css('display', 'block').hide();
+    //small.css('display', 'block').hide();
 
-    presents.fadeIn(4000);
-    presents.fadeOut(1500);
+    //presents.fadeIn(4000);
+    //presents.fadeOut(1500);
 
-    setTimeout(function () {
-        title.fadeIn(4000);
-    }, 5500);
+    //setTimeout(function () {
+    //    title.fadeIn(4000);
+    //}, 5500);
 
-    setTimeout(function () {
-        small.fadeIn(1000);
-        var doc = $(document);
+    //setTimeout(function () {
+    //    small.fadeIn(1000);
+    //    var doc = $(document);
 
-        doc.on('click', function () {
-            menuSound.play();
-            title.attr('src', 'imgs/gos-blk-100-2-fix.png');
-            small.fadeOut(1000);
+    //    doc.on('click', function () {
+    //        menuSound.play();
+    //        title.attr('src', 'imgs/gos-blk-100-2-fix.png');
+    //        small.fadeOut(1000);
 
-            doc.off('click');
-            win.off('resize');
-            centerControlsTable();
-            win.resize(centerControlsTable);
+    //        doc.off('click');
+    //        win.off('resize');
+    //        centerControlsTable();
+    //        win.resize(centerControlsTable);
 
-            title.fadeOut(2000);
-            setTimeout(initializeMenu, 1000);
-            createMuteButton();
-        });
-    }, 9500) // 9500
+    //        title.fadeOut(2000);
+    //        setTimeout(initializeMenu, 1000);
+    //        createMuteButton();
+    //    });
+    //}, 9500) // 9500
 
     function centerMenuWrapper() {
-        var winWidth = win.width();
-        var winHeight = win.height();
-        var ratio = 1; // 0.979;
-        menuWrapper.height(winHeight * ratio);
-        menuWrapper.width(winWidth * ratio);
+        //var winWidth = win.width();
+        //var winHeight = win.height();
+        //var ratio = 1; // 0.979;
+        //menuWrapper.height(winHeight * ratio);
+        //menuWrapper.width(winWidth * ratio);
+    }
+
+    function sizeBodyTo100Percent() {
+        body.height(win.outerHeight());
+        body.width(win.outerWidth());
     }
 
     function initializeMenu() {

@@ -3,13 +3,17 @@
 
     allMenuButtons.click(function () {
         $this = $(this);
-        var contentToDisplay = $this.siblings('.li-item-content')[0];
+        var dataID = $this.attr('data-id');
+
+        var contentToDisplay = $('div[data-id=' + dataID + ']');
         contentToDisplay = $(contentToDisplay);
-        var allContentItems = $('.li-item-content');
+        var allContentItems = $('div.li-item-content');
         allContentItems.not(contentToDisplay).slideUp(500);
         contentToDisplay.toggle(1000);
         if ($this.attr('data-cntrls')) {
             centerControlsTable();
+        } else if ($this.attr('data-authors')) {
+            centerAuthorsTable();
         }
     });
 })()
