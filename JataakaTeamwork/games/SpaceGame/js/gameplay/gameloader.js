@@ -517,7 +517,14 @@ function checkForShipCollisions() {
                     //alert('boom');
                     ARMOR -= 10;
                     playSound(explodeSound, 0.75);
-                    if (ARMOR <= 0) { alert('game over'); }
+                    if (ARMOR <= 0) { 
+                        ARMOR = 0;
+                        AMMO = 0;
+                        var message = '  Game Over!' 
+                                    + '\nYour Score: ' + POINTS 
+                                    + '\nKilled Targets: ' + killed;
+                        alert(message);
+                    }
                     writeScore();
                 }
             }
