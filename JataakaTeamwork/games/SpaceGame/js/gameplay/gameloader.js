@@ -3,7 +3,9 @@
 // initializing the main structures and objects when the document is loaded
 window.onload = function () {
 
-    if (!Detector.webgl) Detector.addGetWebGLMessage();
+    if (!Detector.webgl) {
+        Detector.addGetWebGLMessage();
+    }
 
     radius = 6371;
     tilt = 0.41;
@@ -98,7 +100,7 @@ function init() {
 
     /// visual objects and effects
     dirLight = new THREE.DirectionalLight(0xffffff);
-    dirLight.position.set(-1, 0, 1).normalize();
+    dirLight.position.set( -1, 0, 1).normalize();
     scene.add(dirLight);
 
     ambientLight = new THREE.AmbientLight(0x000000);
@@ -176,7 +178,7 @@ function init() {
     for (var i = 0; i < 2; i++) {
 
         var meshMoonNew = new THREE.Mesh(geometry, materialMoon);
-        meshMoonNew.position.set(-radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, -Math.random() * 66000);
+        meshMoonNew.position.set( -radius * Math.random() * Math.random() * i * 20, Math.random() * 10000, -Math.random() * 66000);
         meshMoonNew.scale.set(moonScale, moonScale, moonScale);
         scene.add(meshMoonNew);
     }
@@ -190,17 +192,17 @@ function init() {
     meshVenus.scale.set(venusScale, venusScale, venusScale);
     scene.add(meshVenus);
 
-    for (var i = 0; i < 2; i++) {
+    for (i = 0; i < 2; i++) {
 
         var meshVenusNew = new THREE.Mesh(geometry, materialVenus);
-        meshVenusNew.position.set(-radius * Math.random() * Math.random() * i * 33, Math.random() * 30000, Math.random() * 50000);
+        meshVenusNew.position.set( -radius * Math.random() * Math.random() * i * 33, Math.random() * 30000, Math.random() * 50000);
         meshVenusNew.scale.set(venusScale, venusScale, venusScale);
         scene.add(meshVenusNew);
     }
 
     // stars
 
-    var i, r = radius, starsGeometry = [new THREE.Geometry(), new THREE.Geometry()];
+    var r = radius, starsGeometry = [new THREE.Geometry(), new THREE.Geometry()];
 
     for (i = 0; i < 1500; i++) {
 
@@ -216,7 +218,7 @@ function init() {
 
     for (i = 0; i < 1500; i++) {
 
-        var vertex = new THREE.Vector3();
+        vertex = new THREE.Vector3();
         vertex.x = Math.random() * 2 - 1;
         vertex.y = Math.random() * 2 - 1;
         vertex.z = Math.random() * 2 - 1;
@@ -256,9 +258,9 @@ function init() {
 
     /// new cubes for target using
 
-    var geometry = new THREE.CubeGeometry(600, 600, 600);
+    geometry = new THREE.CubeGeometry(600, 600, 600);
 
-    for (var i = 0; i < 500; i++) {
+    for (i = 0; i < 500; i++) {
 
         targetIdCounter++;
         var target_id = 'target' + targetIdCounter;
@@ -286,11 +288,11 @@ function init() {
         scene.add(object);
     }
 
-    for (var i = 0; i < 1000; i++) {
+    for (i = 0; i < 1000; i++) {
 
         targetIdCounter++;
-        var target_id = 'target' + targetIdCounter;
-        var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
+        target_id = 'target' + targetIdCounter;
+        object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }));
 
         object.position.x = 200000 * Math.random();
         object.position.y = 200000 * Math.random();
@@ -312,7 +314,6 @@ function init() {
 
     // the enemy ships
      createEnemyShips();
-
 
     projector = new THREE.Projector();
     raycaster = new THREE.Raycaster();
@@ -347,84 +348,83 @@ function init() {
     composer.addPass(renderModel);
     composer.addPass(effectFilm);
 
-};
+}
 
 function createEnemyShips() {
 
     ; (function () {
         // add a ambient light
-        var light = new THREE.AmbientLight(0xff0000)
-        scene.add(light)
+        var light = new THREE.AmbientLight(0xff0000);
+        scene.add(light);
         // add a light in front
-        var light = new THREE.DirectionalLight('white', 1)
-        light.position.set(0.5, 0.5, 2)
-        scene.add(light)
+        light = new THREE.DirectionalLight('white', 1);
+        light.position.set(0.5, 0.5, 2);
+        scene.add(light);
         // add a light behind
-        var light = new THREE.DirectionalLight('white', 1)
-        light.position.set(-0.5, -0.5, -2)
-        scene.add(light)
-    })()
+        light = new THREE.DirectionalLight('white', 1);
+        light.position.set( -0.5, -0.5, -2);
+        scene.add(light);
+    })();
 
     //////////////////////////////////////////////////////////////////////////////////
     //		comment								//
     //////////////////////////////////////////////////////////////////////////////////
 
-
     THREEx.SpaceShips.loadSpaceFighter01(function (object3d) {
-        object3d.position.x = -1
-        object3d.position.y = 0.5
-        scene.add(object3d)
-    })
+        object3d.position.x = -1;
+        object3d.position.y = 0.5;
+        scene.add(object3d);
+    });
 
     THREEx.SpaceShips.loadSpaceFighter02(function (object3d) {
-        object3d.position.x = 1
-        object3d.position.y = 0.5
-        scene.add(object3d)
-    })
+        object3d.position.x = 1;
+        object3d.position.y = 0.5;
+        scene.add(object3d);
+    });
 
     THREEx.SpaceShips.loadSpaceFighter03(function (object3d) {
         var spaceship = object3d;
         spaceship.scale.set(10000, 10000, 10000);
-        scene.add(spaceship)
+        scene.add(spaceship);
 
-        var shoot = new THREEx.SpaceShips.Shoot()
-        shoot.position.x = 0.5
-        shoot.position.z = 0.3
-        scene.add(shoot)
+        var shoot = new THREEx.SpaceShips.Shoot();
+        shoot.position.x = 0.5;
+        shoot.position.z = 0.3;
+        scene.add(shoot);
 
-        var shoot = new THREEx.SpaceShips.Shoot()
-        shoot.position.x = -0.5
-        shoot.position.z = 0.3
-        scene.add(shoot)
+        shoot = new THREEx.SpaceShips.Shoot();
+        shoot.position.x = -0.5;
+        shoot.position.z = 0.3;
+        scene.add(shoot);
 
-        var detonation = new THREEx.SpaceShips.Detonation()
-        detonation.position.x = 0.5
-        detonation.position.z = 0.1
-        scene.add(detonation)
+        var detonation = new THREEx.SpaceShips.Detonation();
+        detonation.position.x = 0.5;
+        detonation.position.z = 0.1;
+        scene.add(detonation);
 
-        var detonation = new THREEx.SpaceShips.Detonation()
-        detonation.position.x = -0.5
-        detonation.position.z = 0.1
-        scene.add(detonation)
+        detonation = new THREEx.SpaceShips.Detonation();
+        detonation.position.x = -0.5;
+        detonation.position.z = 0.1;
+        scene.add(detonation);
 
-        var light = new THREE.PointLight()
-        detonation.position.x = -0.5
-        detonation.position.z = 0.1
+        var light = new THREE.PointLight();
+        detonation.position.x = -0.5;
+        detonation.position.z = 0.1;
 
-        scene.add(light)
-    })
+        scene.add(light);
+    });
 
     THREEx.SpaceShips.loadShuttle01(function (object3d) {
-        object3d.position.x = -1
-        object3d.position.y = -0.5
-        scene.add(object3d)
-    })
+        object3d.position.x = -1;
+        object3d.position.y = -0.5;
+        scene.add(object3d);
+    });
 
     THREEx.SpaceShips.loadShuttle02(function (object3d) {
-        object3d.position.x = 1
-        object3d.position.y = -0.5
-        scene.add(object3d)
-    })
+        object3d.position.x = 1;
+        object3d.position.y = -0.5;
+        scene.add(object3d);
+    });
 }
 
 function onWindowResize(event) {
@@ -439,7 +439,7 @@ function onWindowResize(event) {
 
     composer.reset();
 
-};
+}
 
 function animate() {
 
@@ -448,7 +448,7 @@ function animate() {
     render();
     stats.update();
 
-};
+}
 
 function checkForShipCollisions() {
 
@@ -456,7 +456,7 @@ function checkForShipCollisions() {
     var cy = camera.position.y;
     var cz = camera.position.y;
 
-    if (cx != 0 && cy != 0 && cz != 0) {
+    if (cx !== 0 && cy !== 0 && cz !== 0) {
 
         for (var a in targetScreenObjects) {
 
@@ -515,7 +515,9 @@ function render() {
 
         if (INTERSECTED != intersects[0].object) {
 
-            if (INTERSECTED && INTERSECTED.material.emissive) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+            if (INTERSECTED && INTERSECTED.material.emissive) {
+                INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+            }
 
             INTERSECTED = intersects[0].object;
 
@@ -529,7 +531,9 @@ function render() {
 
     } else {
 
-        if (INTERSECTED && INTERSECTED.material.emissive) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+        if (INTERSECTED && INTERSECTED.material.emissive) {
+            INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+        }
 
         INTERSECTED = null;
 
@@ -578,7 +582,7 @@ function render() {
 
     for (var i = 0; i < mislength; i++) {
 
-        var currentMissile = missilesObjects[i]
+        var currentMissile = missilesObjects[i];
 
         currentMissile.position.x += additionX / 10;
         currentMissile.position.y += additionY / 10;
@@ -590,7 +594,7 @@ function render() {
 
     renderer.clear();
     composer.render(delta);
-};
+}
 
 var globalCx, globalCy, globalCz;
 
@@ -606,7 +610,7 @@ function resetToDisplay() {
     camera.updateProjectionMatrix();
 
     composer.reset();
-};
+}
 
 // function to calculate the mouse coordinates when mouse move
 function onDocumentMouseMove(event) {
@@ -701,7 +705,6 @@ function initMissile() {
     }
 }
 
-
 function coordsInit() {
     setTimeout(function () {
         coordsInitReal();
@@ -789,6 +792,4 @@ function drawShip() {
     var ship = document.getElementById('cabin');
     ctx.drawImage(ship, 0, 0, canvas.width, canvas.height);
 }
-
-
 //}());
