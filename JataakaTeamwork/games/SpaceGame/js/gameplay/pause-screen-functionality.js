@@ -1,3 +1,5 @@
+/// <reference path="../../../splashscreen/splashscreen.html" />
+
 var gameIsPaused = false;
 (function () {
     var pauseScreen = $('#pause-screen');
