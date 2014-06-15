@@ -518,7 +518,6 @@ function checkForShipCollisions() {
                     ARMOR -= 10;
                     playSound(explodeSound, 0.75);
                     if (ARMOR == 0) {
-                        ARMOR = 0;
                         AMMO = 0;
                         writeScore(); 
                         ARMOR = -1;
