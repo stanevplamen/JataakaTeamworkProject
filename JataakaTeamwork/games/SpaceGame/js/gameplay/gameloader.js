@@ -517,15 +517,20 @@ function checkForShipCollisions() {
                     //alert('boom');
                     ARMOR -= 10;
                     playSound(explodeSound, 0.75);
-                    if (ARMOR <= 0) { 
+                    if (ARMOR == 0) {
                         ARMOR = 0;
                         AMMO = 0;
-                        var message = '  Game Over!' 
+                        writeScore(); 
+                        ARMOR = -1;
+                        if (ARMOR == -1) {
+                            var message = '  Game Over!' 
                                     + '\nYour Score: ' + POINTS 
                                     + '\nKilled Targets: ' + killed;
-                        alert(message);
+                            alert(message);
+                            window.location.href = '././index.html';
+                        }
                     }
-                    writeScore();
+					writeScore();
                 }
             }
         }
