@@ -81,7 +81,6 @@
     <Content Include="SpaceGame\js\system\build\three.min.js" />
     <Content Include="SpaceGame\js\system\controls\FlyControls.js" />
     <Content Include="SpaceGame\js\system\libs\Detector.js" />
-    <Content Include="SpaceGame\js\system\libs\jquery-2.0.2.js" />
     <Content Include="SpaceGame\js\system\libs\stats.min.js" />
     <Content Include="SpaceGame\js\system\postprocessing\EffectComposer.js" />
     <Content Include="SpaceGame\js\system\postprocessing\FilmPass.js" />
@@ -170,7 +169,6 @@
     <Content Include="splashscreen\imgs\jataaka-presents-blue.png" />
     <Content Include="splashscreen\imgs\title-blend.png" />
     <Content Include="splashscreen\scripts\animate-splashcreen.js" />
-    <Content Include="splashscreen\scripts\jquery-2.1.1.min.js" />
     <Content Include="splashscreen\scripts\center-splashscreen.js" />
     <Content Include="splashscreen\splashscreen.html" />
     <Content Include="splashscreen\styles\style.css" />
